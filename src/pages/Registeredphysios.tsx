@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button } from "@/ui/button"; // Import Shadcn UI Button component
-import { Table } from "@/ui/table"; // You can use Shadcn UI components for the table as well
+import { Table, TableHeader } from "@/ui/table"; // You can use Shadcn UI components for the table as well
 import { Toaster } from "react-hot-toast";
 import {
   DropdownMenu,
@@ -8,7 +8,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/ui/dropdown-menu";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown,ChevronUp} from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/ui/card";
 import { Avatar } from "@/ui/avatar";
@@ -54,7 +54,15 @@ const appointments: Appointment[] = [
   // Add more rows as needed
 ];
 
+
+  
+
 const RegisteredPhysios: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleContent = () => {
+    setIsOpen((prev) => !prev);
+  };
   const [activeTab, setActiveTab] = useState("all");
   return (
     <div className="bg-gray-100 min-h-screen p-6">
@@ -93,7 +101,8 @@ const RegisteredPhysios: React.FC = () => {
               Subscription Plan
             </TabsTrigger>
             <TabsTrigger value="transaction">Transaction</TabsTrigger>
-            <TabsTrigger value="application">Appointment</TabsTrigger>
+            <TabsTrigger value="wallet">Wallet</TabsTrigger>
+            <TabsTrigger value="appointment">Appointment</TabsTrigger>
             <TabsTrigger value="rating & reviews">Rating & Reviews</TabsTrigger>
             <TabsTrigger value="help & support">Help & Support</TabsTrigger>
           </TabsList>
@@ -163,66 +172,82 @@ const RegisteredPhysios: React.FC = () => {
             </Card>
 
             {/* Professional Details */}
-            <Card className="mb-6">
-              <CardHeader>
-                <CardTitle>Professional Details</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-                    <h3 className="font-semibold mb-2">Degree Name</h3>
-                    <p>Bachelor of Physiotherapy, Master of Physiotherapy</p>
-                  </div>
+            <Card className="mb-6 ">
+            <CardHeader className="flex bg-green-600 rounded-lg">
+        <div className="flex items-center space-x-2 ">
+          <CardTitle>Professional Details</CardTitle>
+          <button onClick={toggleContent} className="p-2 ">
+            {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+          </button>
+        </div>
+      </CardHeader>
+      {isOpen && (
+        
+        <CardContent>
+          
+          <div className="space-y-4">
+            <div className="border p-4 mt-4 rounded-lg shadow-sm bg-gray-100">
+              <h3 className="font-semibold mb-2 ">Degree Name</h3>
+              <p>Bachelor of Physiotherapy, Master of Physiotherapy</p>
+            </div>
 
-                  <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-                    <h3 className="font-semibold mb-2">Degree Images</h3>
-                  </div>
-                  <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-                    <h3 className="font-semibold mb-2">Specialization</h3>
-                    <p>General Pain, Ortho Pain</p>
-                  </div>
+            <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+              <h3 className="font-semibold mb-2">Degree Images</h3>
+            </div>
+            <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+              <h3 className="font-semibold mb-2">Specialization</h3>
+              <p>General Pain, Ortho Pain</p>
+            </div>
 
-                  <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-                    <h3 className="font-semibold mb-2">Sub-Specialization</h3>
-                    <p>Elbow Pain, Neck Pain, Leg Pain, Head Pain, Back Pain</p>
-                  </div>
-                  <div className="flex space-x-4">
-                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
-                      <h3 className="font-semibold mb-2">IAP Registered</h3>
-                      <p>Yes</p>
-                    </div>
-                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
-                      <h3 className="font-semibold mb-2">IAP Number</h3>
-                      <p>8750123645112100</p>
-                    </div>
-                  </div>
-                  <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-                    <h3 className="font-semibold mb-2">IAP certificate</h3>
-                  </div>
-                  <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-                    <h3 className="font-semibold mb-2">IAP Number</h3>
-                    <p>8750123645112100</p>
-                  </div>
-                  <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-                    <h3 className="font-semibold mb-2">IAP Registered</h3>
-                    <p>No</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+              <h3 className="font-semibold mb-2">Sub-Specialization</h3>
+              <p>Elbow Pain, Neck Pain, Leg Pain, Head Pain, Back Pain</p>
+            </div>
+            <div className="flex space-x-4">
+              <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
+                <h3 className="font-semibold mb-2">IAP Registered</h3>
+                <p>Yes</p>
+              </div>
+              <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
+                <h3 className="font-semibold mb-2">IAP Number</h3>
+                <p>8750123645112100</p>
+              </div>
+            </div>
+            <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+              <h3 className="font-semibold mb-2">IAP certificate</h3>
+            </div>
+            <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+              <h3 className="font-semibold mb-2">IAP Number</h3>
+              <p>8750123645112100</p>
+            </div>
+            <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+              <h3 className="font-semibold mb-2">IAP Registered</h3>
+              <p>No</p>
+            </div>
+          </div>
+        </CardContent>
+      )}
+    </Card>
+     
             {/* Clinic Details */}
             <Card className="mb-6">
-              <CardHeader>
-                <CardTitle>Clinic Details</CardTitle>
-              </CardHeader>
+            <CardHeader className="flex bg-green-600 rounded-lg">
+        <div className="flex items-center space-x-2">
+          <CardTitle>Clinic Details</CardTitle>
+          <button onClick={toggleContent} className="p-2 ">
+            {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+          </button>
+        </div>
+      </CardHeader>
+      {isOpen && (
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex space-x-4">
-                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
+                    <div className="border p-4 mt-4 rounded-lg shadow-sm bg-gray-100 flex-1">
                       <h3 className="font-semibold mb-2">Clinic Name</h3>
                       <p>Abhishek Ajmera Clinic and Physio Center</p>
                     </div>
-                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
+                    <div className="border p-4 mt-4 rounded-lg shadow-sm bg-gray-100 flex-1">
                       <h3 className="font-semibold mb-2">Clinic Address</h3>
                       <p>Plot 4 Ram Nagar, Shyam Nagar, Jaipur 302020</p>
                     </div>
@@ -276,25 +301,32 @@ const RegisteredPhysios: React.FC = () => {
                   
               
               </CardContent>
+      )}
             </Card>
 
             {/* Home Care Details */}
             <Card className="mb-6">
-              <CardHeader>
-                <CardTitle>Home Care Details</CardTitle>
-              </CardHeader>
+            <CardHeader className="flex bg-green-600 rounded-lg">
+        <div className="flex items-center space-x-2">
+          <CardTitle>Home Care Details</CardTitle>
+          <button onClick={toggleContent} className="p-2 ">
+            {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+          </button>
+        </div>
+      </CardHeader>
+      {isOpen && (
               <CardContent>
                 <div className="space-y-4">
                 <div className="flex space-x-4">
-                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
+                    <div className="border p-4 mt-4 rounded-lg shadow-sm bg-gray-100 flex-1">
                       <h3 className="font-semibold mb-2">Pincode Where you serve</h3>
                       <p>302020</p>
                     </div>
-                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
+                    <div className="border p-4 mt-4 rounded-lg shadow-sm bg-gray-100 flex-1">
                       <h3 className="font-semibold mb-2">Consultation Fees</h3>
                       <p>₹ 450</p>
                     </div>
-                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
+                    <div className="border p-4 mt-4 rounded-lg shadow-sm bg-gray-100 flex-1">
                       <h3 className="font-semibold mb-2">Consultation Duration</h3>
                       <p>30 minutes</p>
                     </div>
@@ -312,22 +344,29 @@ const RegisteredPhysios: React.FC = () => {
                  
                 </div>
               </CardContent>
+      )}
             </Card>
             {/* Other Treatment Details */}
             <Card className="mb-6">
-              <CardHeader>
-                <CardTitle>Other Treatment Details</CardTitle>
-              </CardHeader>
+            <CardHeader className="flex bg-green-600 rounded-lg">
+        <div className="flex items-center space-x-2">
+          <CardTitle>Other Treatment Details</CardTitle>
+          <button onClick={toggleContent} className="p-2 ">
+            {isOpen ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+          </button>
+        </div>
+      </CardHeader>
+      {isOpen && (
               <CardContent>
                 <div className="space-y-4">
                 <div className="flex space-x-4">
-                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
+                    <div className="border p-4 mt-4 rounded-lg shadow-sm bg-gray-100 flex-1">
                       <h3 className="font-semibold mb-2">Treatment Name</h3>
-                      <p>BAck Pain</p>
+                      <p>Back Pain</p>
                     </div>
-                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
+                    <div className="border p-4 mt-4 rounded-lg shadow-sm bg-gray-100 flex-1">
                       <h3 className="font-semibold mb-2">Treatment Name</h3>
-                      <p>BAck Pain</p>
+                      <p>Back Pain</p>
                     </div>
                   
                   </div>
@@ -344,38 +383,41 @@ const RegisteredPhysios: React.FC = () => {
                  
                 </div>
               </CardContent>
+      )}
             </Card>
           </TabsContent>
           <TabsContent value="subscription plan">
           <div className="p-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-      <Card className="bg-green-100 border border-green-400">
+      <Card className="bg-gradient-to-r from-[#039342] to-[#0BB57C] border border-green-600">
+  
+
           <CardContent className="flex flex-col items-start">
-            <h3 className="text-lg font-semibold mt-5">Free Plan</h3>
-            <p className="text-2xl font-bold text-green-700">₹0</p>
-            <div className="flex flex-wrap gap-5">
-              <p>Patient Count: 4/4 Patient</p>
+            <h3 className="text-lg font-semibold mt-5 text-white">Preminum Plan</h3>
+            <p className="text-2xl font-bold text-white">₹6,499</p>
+            <div className="flex flex-wrap gap-5 text-white">
+              <p>Patient Date: 10 Jan 2024</p>
               <p>Plan Duration: 6 Months</p>
               <p>Valid From: 10 Jan 2024</p>
               <p>Valid Till: 10 June 2024</p>
             </div>
-            <Button className="mt-2 bg-green-600"  disabled>
+            <Button className="mt-2 bg-gradient-to-r from-[#039342] to-[#0BB57C] border border-#EAEBEC"  >
               Active
             </Button>
           </CardContent>
         </Card>
 
-        <Card className="bg-red-100 border border-red-400">
+        <Card className="bg-gradient-to-r from-[#F93C65] to-[#FF5E84] border border-#EAEBEC">
           <CardContent className="flex flex-col items-start">
-            <h3 className="text-lg font-semibold mt-5">Free Plan</h3>
-            <p className="text-2xl font-bold text-red-700">₹0</p>
-            <div className="flex flex-wrap gap-5">
+            <h3 className="text-lg font-semibold mt-5 text-white">Free Plan</h3>
+            <p className="text-2xl font-bold text-white">₹0</p>
+            <div className="flex flex-wrap gap-5 text-white">
               <p>Patient Count: 4/4 Patient</p>
               <p>Plan Duration: 6 Months</p>
               <p>Valid From: 10 Jan 2024</p>
               <p>Valid Till: 10 June 2024</p>
             </div>
-            <Button className="mt-2" variant="destructive" disabled>
+            <Button className="mt-2 bg-gradient-to-r from-[#F93C65] to-[#FF5E84] border border-#EAEBEC" >
               Expired
             </Button>
           </CardContent>
@@ -403,18 +445,18 @@ const RegisteredPhysios: React.FC = () => {
           </div>
 
           <Table  className="w-full">
-            <TableHead>
+            <TableHeader>
               <TableRow>
-                <TableCell>Plan Name</TableCell>
-                <TableCell>Total Amount</TableCell>
-                <TableCell>Coupon Applied</TableCell>
-                <TableCell>Coupon Amount</TableCell>
-                <TableCell>Amount Paid</TableCell>
-                <TableCell>Payment Date</TableCell>
-                <TableCell>Payment Type</TableCell>
-                <TableCell>Action</TableCell>
+                <TableHead>Plan Name</TableHead>
+                <TableHead>Total Amount</TableHead>
+                <TableHead>Coupon Applied</TableHead>
+                <TableHead>Coupon Amount</TableHead>
+                <TableHead>Amount Paid</TableHead>
+                <TableHead>Payment Date</TableHead>
+                <TableHead>Payment Type</TableHead>
+                <TableHead>Action</TableHead>
               </TableRow>
-            </TableHead>
+            </TableHeader>
            
           </Table>
 
@@ -424,9 +466,89 @@ const RegisteredPhysios: React.FC = () => {
     </div>
           </TabsContent>
           <TabsContent value="transaction">
+          <div className="p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-semibold">Transaction</h1>
+        <div className="flex gap-4 items-center">
+          <Button variant="outline" className="flex items-center">
+            <Filter className="mr-2 h-4 w-4" />
+            Filter by date
+          </Button>
+          <Button variant="outline" className="flex items-center">
+            <Filter className="mr-2 h-4 w-4" />
+            Filter Any
+          </Button>
+          <Button variant="outline" className="flex items-center">
+            
+            Export
+          </Button>
+        </div>
+      </div>
+
+      <Card>
+        <CardContent>
+          <div className="overflow-x-auto">
+            <Table className="min-w-full">
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Transaction Id</TableHead>
+                  <TableHead>Details</TableHead>
+                  <TableHead>Service Type</TableHead>
+                  <TableHead>Amount</TableHead>
+                  <TableHead>Payment Method</TableHead>
+                  <TableHead>Payment Status</TableHead>
+                  <TableHead>Action</TableHead>
+                </TableRow>
+              </TableHeader>
+            
+              <TableBody>
+                {[...Array(7)].map((_, index) => (
+                  <TableRow key={index}>
+                    <TableCell>Transaction Id</TableCell>
+                    <TableCell>
+                      <div className="flex flex-col">
+                        <span className="font-medium">Himanshu Saini</span>
+                        <span className="text-sm text-gray-500">30 Jan 2024</span>
+                      </div>
+                    </TableCell>
+                    <TableCell>Home Care</TableCell>
+                    <TableCell>₹1000</TableCell>
+                    <TableCell>Consultation</TableCell>
+                    <TableCell>
+                      <span
+                        className={`px-2 py-1 rounded-full text-sm font-medium ${index === 2 ? "bg-yellow-100 text-yellow-800" : "bg-green-100 text-green-800"}`}
+                      >
+                        {index === 2 ? "Pending" : "Success"}
+                      </span>
+                    </TableCell>
+                    <TableCell>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost">...</Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent>
+                          <DropdownMenuItem>Edit</DropdownMenuItem>
+                          <DropdownMenuItem>Delete</DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+
+        
+        </CardContent>
+      </Card>
+    </div>
+
+      
+          </TabsContent>
+          <TabsContent value="wallet">
             {/* Content for Clinic Appointments */}
           </TabsContent>
-          <TabsContent value="application">
+          <TabsContent value="appointment">
             {/* Content for Clinic Appointments */}
           </TabsContent>
           <TabsContent value="rating & reviews">
@@ -469,15 +591,19 @@ const RegisteredPhysios: React.FC = () => {
           </div>
 
           <Table>
-            <TableHead>
+            
+              <TableHeader>
+                
               <TableRow>
-                <TableCell>Patient Name</TableCell>
-                <TableCell>Appointment Id</TableCell>
-                <TableCell>Rating</TableCell>
-                <TableCell>Posted On</TableCell>
-                <TableCell>Actions</TableCell>
-              </TableRow>
-            </TableHead>
+                <TableHead>Patient Name</TableHead>
+                <TableHead>Appointment Id</TableHead>
+                <TableHead>Rating</TableHead>
+                <TableHead>Posted On</TableHead>
+                <TableHead>Actions</TableHead>
+                </TableRow>
+                 </TableHeader>
+            
+           
             <TableBody>
               {[...Array(8)].map((_, index) => (
                 <TableRow key={index}>
@@ -501,6 +627,7 @@ const RegisteredPhysios: React.FC = () => {
             </TableBody>
           </Table>
           
+            
           
         </CardContent>
       </Card>
