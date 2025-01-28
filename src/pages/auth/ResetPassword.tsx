@@ -1,4 +1,4 @@
-import { Input } from "@/ui/input";
+import { Input } from "@/components/ui/input";
 import logo from "@/assets/image 2.png";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";

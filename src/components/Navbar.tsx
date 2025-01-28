@@ -1,5 +1,5 @@
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import logo from "../assets/User.png";
 import { useNavigate } from "react-router-dom";
 import{Bell} from "lucide-react";
@@ -30,7 +30,7 @@ const Navbar = () => {
 					className="relative cursor-pointer"
 					onClick={() => navigate("/notification")}
 				>
-					<Bell className="w-5 h-5 ml-auto" />
+					<Bell className="w-5 h-5 ml-auto " />
 					<div className="absolute bottom-3 left-3 text-white bg-red-600 rounded-full flex items-center justify-center px-1 text-xs ml-auto">
 						5
 					</div>

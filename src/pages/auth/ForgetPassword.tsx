@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "@/assets/image 2.png";
-import { Input } from "@/ui/input";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/ui/dialog";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/ui/input-otp";
+import { Input } from "@/components/ui/input";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { useEffect, useState } from "react";
 
 const ForgetPassword = () => {

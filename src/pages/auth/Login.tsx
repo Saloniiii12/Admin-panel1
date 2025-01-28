@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "@/assets/image 2.png";
 
-import { Input } from "@/ui/input";
+import { Input } from "@/components/ui/input";
 import { loginSchema } from "@/lib/schema/auth";
 import { toast } from "react-hot-toast";
 

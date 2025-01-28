@@ -26,7 +26,7 @@ import {
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
-} from "@/ui/sidebar";
+} from "@/components/ui/sidebar";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
