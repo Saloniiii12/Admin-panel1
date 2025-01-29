@@ -1,15 +1,15 @@
 // import { useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	// useEffect(() => {
 	// 	const token = sessionStorage.getItem("token");
 	// 	if (!token || token === "") {
 	// 		navigate("/auth/login");
 	// 	} else {
-	// 		navigate("/dashboard");
+			navigate("/dashboard");
 	// 	}
 	// }, [navigate]);
 

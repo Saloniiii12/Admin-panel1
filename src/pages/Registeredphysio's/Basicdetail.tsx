@@ -1,134 +1,153 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar } from "@/components/ui/avatar";
-import  { useState } from "react";
-import { ChevronDown,ChevronUp} from "lucide-react";
+import { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
+
 const Basicdetail = () => {
-  const [openCardId,setOpenCardId] = useState<number | null>(null);
-     const toggleContent = (cardId:number) => {
-      setOpenCardId((prevId) =>(prevId === cardId?null:cardId ));
-    };
-   
+  const [openCardId, setOpenCardId] = useState<number | null>(null);
+  const [degreeImages, setDegreeImages] = useState<File[]>([]);
+
+  const toggleContent = (cardId: number) => {
+    setOpenCardId((prevId) => (prevId === cardId ? null : cardId));
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setDegreeImages(Array.from(e.target.files)); // Update the degreeImages state with selected files
+    }
+  };
+
+  const renderDegreeImages = () => {
+    return degreeImages.map((image, index) => (
+      <div key={index} className="border p-4 rounded-lg shadow-sm bg-gray-100">
+        <img src={URL.createObjectURL(image)} alt={`Degree Image ${index}`} className="w-full h-auto rounded-md" />
+      </div>
+    ));
+  };
+
   return (
-    
     <div>
-       <Card className="mb-6">
-              <CardContent>
-                <div className="flex items-start space-x-4">
-                  {/* Profile Image */}
-                  <Avatar className="w-32 h-32 rounded-full bg-gray-100 mt-5" />
-                  {/* Info Boxes */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 flex-1 mt-4">
-                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-                      <p>
-                        <strong>Name:</strong>
-                      </p>
-                      <p style={{ color: "#515662" }}>Dr. Abhi Ajmera</p>
-                    </div>
-                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-                      <p>
-                        <strong>Gender:</strong>
-                      </p>
-                      <p style={{ color: "#515662" }}>Male</p>
-                    </div>
-                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-                      <p>
-                        <strong>Experience:</strong>
-                      </p>
-                      <p style={{ color: "#515662" }}>2 Years</p>
-                    </div>
-                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-                      <p>
-                        <strong>Date of Birth:</strong>
-                      </p>
-                      <p style={{ color: "#515662" }}>19 Jan 1998</p>
-                    </div>
-                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-                      <p>
-                        <strong>Contact Number:</strong>
-                      </p>
-                      <p style={{ color: "#515662" }}>9876543210</p>
-                    </div>
-                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-                      <p>
-                        <strong>Email :</strong>
-                      </p>
-                      <p style={{ color: "#515662" }}>bayabhishek@gmail.com</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-4">
-                  <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-                    <h3 className="font-semibold mb-2">About Physio</h3>
-                    <p>
-                      Dr. Abhi Mehra is a skilled physiotherapist dedicated to
-                      improving patients' physical health and well-being. With
-                      expertise in pain management, rehabilitation, and mobility
-                      restoration, Dr. Mehra offers personalized treatment plans
-                      tailored to individual needs.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-              {/* Professional Details */}
-              <Card className="mb-6 ">
-            <CardHeader className="flex bg-[#039342] rounded-lg">
-        <div className="flex items-center space-x-2 text-white">
-          <CardTitle>Professional Details</CardTitle>
-          
-         <button onClick={()=>toggleContent(1)} className="p-2">
-          {openCardId===1?<ChevronUp size={20}/>:<ChevronDown size={20}/>}
-         </button>
-        </div>
-        <h3 className="text-white">You can view professional details below:</h3>
-      </CardHeader>
-      {openCardId===1 && (
-        
+      <Card className="mb-6">
         <CardContent>
-          
-          <div className="space-y-4">
-            <div className="border p-4 mt-4 rounded-lg shadow-sm bg-gray-100">
-              <h3 className="font-semibold mb-2 ">Degree Name</h3>
-              <p>Bachelor of Physiotherapy, Master of Physiotherapy</p>
-            </div>
-
-            <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-              <h3 className="font-semibold mb-2">Degree Images</h3>
-            </div>
-            <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-              <h3 className="font-semibold mb-2">Specialization</h3>
-              <p>General Pain, Ortho Pain</p>
-            </div>
-
-            <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-              <h3 className="font-semibold mb-2">Sub-Specialization</h3>
-              <p>Elbow Pain, Neck Pain, Leg Pain, Head Pain, Back Pain</p>
-            </div>
-            <div className="flex space-x-4">
-              <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
-                <h3 className="font-semibold mb-2">IAP Registered</h3>
-                <p>Yes</p>
+          <div className="flex items-start space-x-4">
+            {/* Profile Image */}
+            <Avatar className="w-32 h-32 rounded-full bg-gray-100 mt-5" />
+            {/* Info Boxes */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 flex-1 mt-4">
+              <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+                <p>
+                  <strong>Name:</strong>
+                </p>
+                <p style={{ color: "#515662" }}>Dr. Abhi Ajmera</p>
               </div>
-              <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
-                <h3 className="font-semibold mb-2">IAP Number</h3>
-                <p>8750123645112100</p>
+              <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+                <p>
+                  <strong>Gender:</strong>
+                </p>
+                <p style={{ color: "#515662" }}>Male</p>
+              </div>
+              <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+                <p>
+                  <strong>Experience:</strong>
+                </p>
+                <p style={{ color: "#515662" }}>2 Years</p>
+              </div>
+              <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+                <p>
+                  <strong>Date of Birth:</strong>
+                </p>
+                <p style={{ color: "#515662" }}>19 Jan 1998</p>
+              </div>
+              <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+                <p>
+                  <strong>Contact Number:</strong>
+                </p>
+                <p style={{ color: "#515662" }}>9876543210</p>
+              </div>
+              <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+                <p>
+                  <strong>Email :</strong>
+                </p>
+                <p style={{ color: "#515662" }}>bayabhishek@gmail.com</p>
               </div>
             </div>
+          </div>
+          <div className="mt-4">
             <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-              <h3 className="font-semibold mb-2">IAP certificate</h3>
-            </div>
-            <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-              <h3 className="font-semibold mb-2">IAP Number</h3>
-              <p>8750123645112100</p>
-            </div>
-            <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-              <h3 className="font-semibold mb-2">IAP Registered</h3>
-              <p>No</p>
+              <h3 className="font-semibold mb-2">About Physio</h3>
+              <p>
+                Dr. Abhi Mehra is a skilled physiotherapist dedicated to improving patients' physical health and well-being. With expertise in pain management, rehabilitation, and mobility restoration, Dr. Mehra offers personalized treatment plans tailored to individual needs.
+              </p>
             </div>
           </div>
         </CardContent>
-      )}
-    </Card>
+      </Card>
+
+      {/* Professional Details */}
+      <Card className="mb-6">
+        <CardHeader className="flex bg-[#039342] rounded-lg">
+          <div className="flex items-center space-x-2 text-white">
+            <CardTitle>Professional Details</CardTitle>
+            <button onClick={() => toggleContent(1)} className="p-2">
+              {openCardId === 1 ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+            </button>
+          </div>
+          <h3 className="text-white">You can view professional details below:</h3>
+        </CardHeader>
+        {openCardId === 1 && (
+          <CardContent>
+            <div className="space-y-4">
+              <div className="border p-4 mt-4 rounded-lg shadow-sm bg-gray-100">
+                <h3 className="font-semibold mb-2">Degree Name</h3>
+                <p>Bachelor of Physiotherapy, Master of Physiotherapy</p>
+              </div>
+
+             {/* Degree Images Section */}
+             <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+                <h3 className="font-semibold mb-2">Degree Images</h3>
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={handleImageChange}
+                  className="mb-4"
+                />
+                <div className="grid grid-cols-3 gap-4">
+                  {degreeImages.length > 0 && renderDegreeImages()}
+                </div>
+              </div>
+
+              <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+                <h3 className="font-semibold mb-2">Specialization</h3>
+                <p>General Pain, Ortho Pain</p>
+              </div>
+
+              <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+                <h3 className="font-semibold mb-2">Sub-Specialization</h3>
+                <p>Elbow Pain, Neck Pain, Leg Pain, Head Pain, Back Pain</p>
+              </div>
+
+              <div className="flex space-x-4">
+                <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
+                  <h3 className="font-semibold mb-2">IAP Registered</h3>
+                  <p>Yes</p>
+                </div>
+                <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
+                  <h3 className="font-semibold mb-2">IAP Number</h3>
+                  <p>8750123645112100</p>
+                </div>
+              </div>
+
+              <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+                <h3 className="font-semibold mb-2">IAP certificate</h3>
+              </div>
+            </div>
+          </CardContent>
+        )}
+      </Card>
+   
+
+
      
             {/* Clinic Details */}
             <Card className="mb-6">

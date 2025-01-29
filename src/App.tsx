@@ -6,6 +6,7 @@ import { Toaster } from "react-hot-toast";
 import Login from "@/pages/auth/Login";
 import ResetPassword from "@/pages/auth/ResetPassword";
 import ForgetPassword from "@/pages/auth/ForgetPassword";
+import EditDetail from "./pages/EditDetail";
 // auth pages
 
 // Redirect component to go back to the previous page
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/Registeredphysios", // RegisteredPhysios route
         element: <Registeredphysios />,
+      },
+      {
+        path: "edit/3", // Route for fixed ID 3
+        element: <EditDetail />,
       },
       {
         path: "/redirect", // Example of a redirect route
