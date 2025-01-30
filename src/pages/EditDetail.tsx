@@ -1,15 +1,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Avatar } from "@/components/ui/avatar";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Pencil } from "lucide-react";
 
 const EditDetail = () => {
   const [formData, setFormData] = useState({
@@ -38,7 +38,10 @@ const EditDetail = () => {
     degreeImage: "",
     //addphysioworking:"",
   });
+  //
+  const FileRef = useRef<HTMLInputElement>(null);
 
+  //
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -57,7 +60,28 @@ const EditDetail = () => {
         <Card className="mb-6">
           <CardContent>
             <div className="flex items-start space-x-4">
-              <Avatar className="w-32 h-32 rounded-full bg-gray-100 mt-5" />
+              <div className="w-32 h-32 rounded-full bg-gray-100 mt-5 relative">
+                {/* Profile Image (if you have a default image, use it here) */}
+                <div className="w-full h-full rounded-full bg-gray-300 flex justify-center items-center">
+                  {/* Placeholder for the image */}
+                  <span className="text-white">Image</span>
+                </div>
+                <Input
+                  type="file"
+                  accept="image/*"
+                  ref={FileRef}
+                  onChange={handleChange}
+                  className="hidden"
+                />
+
+                <div
+                  className="w-8 h-8 p-2 rounded-full absolute bottom-0 left-2/3 bg-green-700 cursor-pointer flex justify-center items-center"
+                  onClick={() => FileRef.current?.click()}
+                >
+                  <Pencil className="text-white" />
+                </div>
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 flex-1 mt-4">
                 <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
                   <p>
@@ -71,7 +95,7 @@ const EditDetail = () => {
                 </div>
                 <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
                   <p>
-                    <strong>Gender:</strong>
+                    <strong> Gender:</strong>
                   </p>
                   <Input
                     name="gender"
@@ -128,6 +152,7 @@ const EditDetail = () => {
                   name="about"
                   value={formData.about}
                   onChange={handleChange}
+                  className="bg-gray-100"
                 />
               </div>
             </div>
@@ -242,6 +267,7 @@ const EditDetail = () => {
                   name="clinicAddress"
                   value={formData.clinicAddress}
                   onChange={handleChange}
+                  className="bg-gray-100"
                 />
               </div>
               <div className="flex space-x-4">

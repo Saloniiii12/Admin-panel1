@@ -7,8 +7,8 @@ import Login from "@/pages/auth/Login";
 import ResetPassword from "@/pages/auth/ResetPassword";
 import ForgetPassword from "@/pages/auth/ForgetPassword";
 import EditDetail from "./pages/EditDetail";
+import Degree from "./pages/Degree";
 // auth pages
-
 // Redirect component to go back to the previous page
 const RedirectToPreviousPage = () => {
   const navigate = useNavigate();
@@ -51,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "/Registeredphysios", // RegisteredPhysios route
         element: <Registeredphysios />,
+      },
+      {
+        path:"/Degree",
+        element:<Degree />,
       },
       {
         path: "edit/3", // Route for fixed ID 3
