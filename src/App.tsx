@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import { createBrowserRouter, Navigate, Outlet, RouterProvider, useNavigate } from "react-router-dom";
 import MainLayout from "./components/MainLayout";
-import Registeredphysios from "./pages/Registeredphysios";
+//import Registeredphysios from "./pages/Registeredphysios";
 import { Toaster } from "react-hot-toast";
 import Login from "@/pages/auth/Login";
 import ResetPassword from "@/pages/auth/ResetPassword";
 import ForgetPassword from "@/pages/auth/ForgetPassword";
 import EditDetail from "./pages/EditDetail";
-import Degree from "./pages/Degree";
+
+import ViewDetail from "./pages/ViewDetail";
+import Registeredphysios from "./pages/Registeredphysios";
 // auth pages
 // Redirect component to go back to the previous page
 const RedirectToPreviousPage = () => {
@@ -52,13 +54,14 @@ const router = createBrowserRouter([
         path: "/Registeredphysios", // RegisteredPhysios route
         element: <Registeredphysios />,
       },
-      {
-        path:"/Degree",
-        element:<Degree />,
-      },
+      
       {
         path: "edit/3", // Route for fixed ID 3
         element: <EditDetail />,
+      },
+      {
+        path: "view/3",
+        element: <ViewDetail />,
       },
       {
         path: "/redirect", // Example of a redirect route
