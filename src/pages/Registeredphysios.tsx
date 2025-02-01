@@ -15,8 +15,20 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@radix-ui/react-popover";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 const physios = [
   {
     name: "Olivia Rhye",
@@ -186,12 +198,14 @@ const unapprovedphysios = [
   },
 ];
 const Registeredphysios: React.FC = () => {
-const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const handleViewClick = () => {
     const physioId = 3; // Replace this with dynamic ID logic
     navigate(`/view/${physioId}`);
   };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       <div className="flex justify-end items-center mb-6">
@@ -200,7 +214,10 @@ const navigate = useNavigate();
             All Time <ChevronDown />
           </Button>
           <Button variant="outline">Add Physio's +</Button>
-          <Button variant="outline" className="bg-[#039342] text-white hover:bg-[#039342] hover:text-white">
+          <Button
+            variant="outline"
+            className="bg-[#039342] text-white hover:bg-[#039342] hover:text-white"
+          >
             Export
           </Button>
         </div>
@@ -287,22 +304,21 @@ const navigate = useNavigate();
                       </td>
                       <td>{physio.type}</td>
                       <td>{physio.phone}</td>
-                      <td> <p className="text-blue-600">{physio.plan}</p>
-                      <p className="text-sm text-gray-500">
+                      <td>
+                        {" "}
+                        <p className="text-blue-600">{physio.plan}</p>
+                        <p className="text-sm text-gray-500">
                           {physio.details}
                         </p>
                       </td>
                       <td
-                        
-                          className={
-                            physio.status === "Approved"
-                              ? "text-green-500"
-                              : "text-red-500"
-                          }
-                        >
-                          {physio.status}
-                     
-                       
+                        className={
+                          physio.status === "Approved"
+                            ? "text-green-500"
+                            : "text-red-500"
+                        }
+                      >
+                        {physio.status}
                       </td>
                       <td>
                         <DropdownMenu>
@@ -310,7 +326,9 @@ const navigate = useNavigate();
                             <MoreVertical className="cursor-pointer" />
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
-                            <DropdownMenuItem onClick={handleViewClick}>View Profile </DropdownMenuItem>
+                            <DropdownMenuItem onClick={handleViewClick}>
+                              View Profile{" "}
+                            </DropdownMenuItem>
                             <DropdownMenuItem>Delete</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -387,7 +405,9 @@ const navigate = useNavigate();
                             <MoreVertical className="cursor-pointer" />
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
-                            <DropdownMenuItem onClick={handleViewClick}>View Profile</DropdownMenuItem>
+                            <DropdownMenuItem onClick={handleViewClick}>
+                              View Profile
+                            </DropdownMenuItem>
                             <DropdownMenuItem>Delete</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -451,21 +471,30 @@ const navigate = useNavigate();
                       <td>{physio.phone}</td>
                       <td className="text-blue-600">{physio.plan}</td>
                       <td>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <Button 
-                            className="bg-[#DFF1E7] hover:bg-[#DFF1E7] text-[#039342]"
-                          >
-                            Approved
-                          </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-60  shadow-lg bg-white p-4 rounded-md right-0 absolute">
-                          <h3 className="font-bold">Wants to approved Dr. Abhishek Mehra?</h3>
-                          <p>Are you sure you want to approve this physiotherapist?Approving them will grant them access to the plateform,allowing them to provide services and manage thier profile</p>
-                          <Button className=" flex-row bg-green-700">Cancel</Button>
-                          <Button className="ml-3 mt-2 bg-green-700">Approv</Button>
-                        </PopoverContent>
-                      </Popover>
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <Button className="bg-[#DFF1E7] hover:bg-[#DFF1E7] text-[#039342]">
+                              Approved
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-60  shadow-lg bg-white p-4 rounded-md right-0 absolute">
+                            <h3 className="font-bold">
+                              Wants to approved Dr. Abhishek Mehra?
+                            </h3>
+                            <p>
+                              Are you sure you want to approve this
+                              physiotherapist?Approving them will grant them
+                              access to the plateform,allowing them to provide
+                              services and manage thier profile
+                            </p>
+                            <Button className=" flex-row bg-green-700">
+                              Cancel
+                            </Button>
+                            <Button className="ml-3 mt-2 bg-green-700">
+                              Approv
+                            </Button>
+                          </PopoverContent>
+                        </Popover>
                       </td>
                       <td>
                         <DropdownMenu>
@@ -473,8 +502,10 @@ const navigate = useNavigate();
                             <MoreVertical className="cursor-pointer" />
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
-                            <DropdownMenuItem onClick={handleViewClick}>View Profile</DropdownMenuItem>
-                             
+                            <DropdownMenuItem onClick={handleViewClick}>
+                              View Profile
+                            </DropdownMenuItem>
+
                             <DropdownMenuItem>Delete</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
@@ -494,7 +525,6 @@ const navigate = useNavigate();
               className="w-1/3"
             />
             <div className="flex gap-2">
-
               <Button variant="outline">
                 Physio’s Plan
                 <ChevronDown />
@@ -503,14 +533,44 @@ const navigate = useNavigate();
                 Service Type
                 <ChevronDown />
               </Button>
-              <Button variant="outline" className="bg-[#039342] text-white hover:bg-[#039342] hover:text-white">
-               
-                Blocked
-                <Lock/>
-              </Button>
+              <Dialog
+                open={isModalOpen}
+                onOpenChange={setIsModalOpen}
+                modal={false}
+              >
+                <DialogTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="bg-[#039342] text-white hover:bg-[#039342] hover:text-white"
+                    onClick={() => setIsModalOpen(true)}
+                  >
+                    Blocked
+                    <Lock />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="w-80 p-6 ">
+                  <DialogHeader>
+                    <DialogTitle>Block Physio</DialogTitle>
+                  </DialogHeader>
+                  <Input
+                    placeholder="Enter name if available"
+                    className="mb-2"
+                  />
+                  <Input
+                    placeholder="Enter number to block physio"
+                    className="mb-2"
+                  />
+                  <Input
+                    placeholder="Enter reason to block physio"
+                    className="mb-4"
+                  />
+                  <Button className="bg-[#039342] text-white w-full">
+                    Save & Block Physio
+                  </Button>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
-
           {/* Table */}
           <Card>
             <CardContent>
@@ -533,22 +593,21 @@ const navigate = useNavigate();
                       </td>
                       <td>{physio.type}</td>
                       <td>{physio.phone}</td>
-                      <td> <p className="text-blue-600">{physio.plan}</p>
-                      <p className="text-sm text-gray-500">
+                      <td>
+                        {" "}
+                        <p className="text-blue-600">{physio.plan}</p>
+                        <p className="text-sm text-gray-500">
                           {physio.details}
                         </p>
                       </td>
                       <td
-                        
-                          className={
-                            physio.status === "Approved"
-                              ? "text-green-500"
-                              : "text-red-500"
-                          }
-                        >
-                          {physio.status}
-                     
-                       
+                        className={
+                          physio.status === "Approved"
+                            ? "text-green-500"
+                            : "text-red-500"
+                        }
+                      >
+                        {physio.status}
                       </td>
                       <td>
                         <DropdownMenu>
@@ -556,7 +615,9 @@ const navigate = useNavigate();
                             <MoreVertical className="cursor-pointer" />
                           </DropdownMenuTrigger>
                           <DropdownMenuContent>
-                            <DropdownMenuItem onClick={handleViewClick}>View Profile</DropdownMenuItem>
+                            <DropdownMenuItem onClick={handleViewClick}>
+                              View Profile
+                            </DropdownMenuItem>
                             <DropdownMenuItem>Delete</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
