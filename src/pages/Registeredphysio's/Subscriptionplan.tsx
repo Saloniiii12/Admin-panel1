@@ -62,8 +62,6 @@ const Subscriptionplan = () => {
   const openModal = (plan: SubscriptionPlan, event?: unknown) => {
     setSelectedPlan(plan);
     setIsModalOpen(true);
-
-   
     if (buttonRef.current) {
       const rect = buttonRef.current.getBoundingClientRect();
       setPosition({ bottom:null , left: rect.left - 50 });
@@ -74,20 +72,39 @@ const Subscriptionplan = () => {
     <div className="p-6">
        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
     <Card className="bg-gradient-to-r from-[#039342] to-[#0BB57C] border border-green-600">
-
-
         <CardContent className="flex flex-col items-start">
-          <h3 className="text-lg font-semibold mt-5 text-white">Preminum Plan</h3>
-          <p className="text-2xl font-bold text-white">₹6,499</p>
-          <div className="flex flex-wrap gap-5 text-white">
-            <p>Patient Date: 10 Jan 2024</p>
-            <p>Plan Duration: 6 Months</p>
-            <p>Valid From: 10 Jan 2024</p>
-            <p>Valid Till: 10 June 2024</p>
-          </div>
-          <Button className="mt-2 bg-gradient-to-r from-[#039342] to-[#0BB57C] border border-#EAEBEC"  >
+        <div className="flex flex-row ">
+          <h3 className="text-lg font-semibold mt-8 text-white">Preminum Plan</h3>
+          <Button className="mt-8 bg-gradient-to-r from-[#039342] to-[#0BB57C] border border-#EAEBEC ml-64 p-5"  >
             Active
           </Button>
+          </div>
+          <p className="text-2xl font-bold text-white mb-2">₹6,499</p>
+          <div className="flex flex-row gap-5 text-white">
+            <p>Patient Date:  Jan 2024</p>
+            <p>Plan Duration:  Months</p>
+            <p>Valid From:  Jan 2024</p>
+            <p>Valid Till:  June 2024</p>
+          </div>
+        </CardContent>
+      </Card>
+      
+    <Card className="bg-gradient-to-r from-[#F93C65] to-[#FF5E84] border border-green-600">
+        <CardContent className="flex flex-col items-start">
+          <div className="flex flex-row ">
+          <h3 className="text-lg font-semibold mt-8 text-white">Free Plan</h3>
+          <Button className="mt-8 bg-gradient-to-r from-[#F93C65] to-[#FF5E84] border border-#EAEBEC ml-72 p-5"  >
+            Expired
+          </Button>
+          </div>
+          <p className="text-2xl font-bold text-white mb-2">₹0</p>
+          <div className="flex flex-row gap-5 text-white">
+            <p>Patient Date:  Jan 2024</p>
+            <p>Plan Duration:  Months</p>
+            <p>Valid From:  Jan 2024</p>
+            <p>Valid Till:  June 2024</p>
+          </div>
+         
         </CardContent>
       </Card>
 
@@ -142,7 +159,7 @@ const Subscriptionplan = () => {
                     </div>
                   </td>
                 </tr>
-              ))}
+              ))} 
             </tbody>
           </Table>
         </CardContent>

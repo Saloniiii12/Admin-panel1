@@ -209,6 +209,7 @@ const Registeredphysios: React.FC = () => {
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
       <div className="flex justify-end items-center mb-6">
+        <h1 className="mr-auto font-semibold text-2xl">Registered Physio's</h1>
         <div className="flex items-center gap-4">
           <Button variant="outline">
             All Time <ChevronDown />
@@ -222,38 +223,58 @@ const Registeredphysios: React.FC = () => {
           </Button>
         </div>
       </div>
-      <Card>
-        <CardContent className="grid grid-cols-5 divide-x divide-gray-300 border border-gray-300 rounded-lg p-4">
-          <div className="text-center px-4">
-            <p className="text-lg font-semibold">Total Physio's</p>
-            <p className="text-2xl font-bold">15,020</p>
-          </div>
-          <div className="text-center px-4">
-            <p className="text-lg font-semibold">Approved Physio's</p>
-            <p className="text-2xl font-bold">12,999</p>
-          </div>
-          <div className="text-center px-4">
-            <p className="text-lg font-semibold">Premium Plan Physio's</p>
-            <p className="text-2xl font-bold">10,120</p>
-          </div>
-          <div className="text-center px-4">
-            <p className="text-lg font-semibold">Free Plan Physio's</p>
-            <p className="text-2xl font-bold">2,900</p>
-          </div>
-          <div className="text-center px-4">
-            <p className="text-lg font-semibold">Pending Physio's</p>
-            <p className="text-2xl font-bold">2,000</p>
-          </div>
-        </CardContent>
-      </Card>
+      <div className="grid grid-cols-5 gap-0 ">
+        <Card className="p-4 text-center rounded-none">
+          <p>Total Physio's</p>
+          <p className="text-xl font-bold">12,999</p>
+        </Card>
+        <Card className="p-4 text-center rounded-none">
+          <p>Approved Physio's</p>
+          <p className="text-xl font-bold">12,900</p>
+        </Card>
+        <Card className="p-4 text-center rounded-none">
+          <p>Premium Plan Physio's</p>
+          <p className="text-xl font-bold ">10,120</p>
+        </Card>
+        <Card className="p-4 text-center rounded-none">
+          <p>Free Plan Physio's</p>
+          <p className="text-xl font-bold">2,000</p>
+        </Card>
+        <Card className="p-4 text-center rounded-none">
+          <p>Pending Physio's</p>
+          <p className="text-xl font-bold">2,900</p>
+        </Card>
+      </div>
       {/* Tabs */}
+
       <Tabs defaultValue="all">
-        <TabsList className="flex space-x-4 border-b p-2 mt-5">
-          <TabsTrigger value="all">All Physio's</TabsTrigger>
-          <TabsTrigger value="approved">Approved Physio's</TabsTrigger>
-          <TabsTrigger value="unapproved">Unapproved Physio's</TabsTrigger>
-          <TabsTrigger value="blocked">Block Physio's</TabsTrigger>
+        <TabsList className="flex p-2 mt-5 bg-gray-50 justify-start">
+          <TabsTrigger
+            className="border-b-2 rounded-none shadow-none border-gray-200  data-[state=active]:text-green-500 data-[state=active]:border-green-500 data-[state=active]:bg-gray-50"
+            value="all"
+          >
+            All Physio's
+          </TabsTrigger>
+          <TabsTrigger
+            className="border-b-2 rounded-none shadow-none border-gray-200  data-[state=active]:text-green-500 data-[state=active]:border-green-500 data-[state=active]:bg-gray-50"
+            value="approved"
+          >
+            Approved Physio's
+          </TabsTrigger>
+          <TabsTrigger
+            className="border-b-2 rounded-none shadow-none border-gray-200  data-[state=active]:text-green-500 data-[state=active]:border-green-500 data-[state=active]:bg-gray-50"
+            value="unapproved"
+          >
+            Unapproved Physio's
+          </TabsTrigger>
+          <TabsTrigger
+            className="border-b-2 rounded-none shadow-none border-gray-200  data-[state=active]:text-green-500 data-[state=active]:border-green-500 data-[state=active]:bg-gray-50"
+            value="blocked"
+          >
+            Block Physio's
+          </TabsTrigger>
         </TabsList>
+
         <TabsContent value="all">
           {/* Search & Filters */}
           <div className="flex justify-between my-4">
@@ -262,23 +283,74 @@ const Registeredphysios: React.FC = () => {
               className="w-1/3"
             />
             <div className="flex gap-2">
-              <Button variant="outline">
-                Plan Status:Active,Expired
-                <ChevronDown />
-              </Button>
+              {/* Plan Status Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Plan Status
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Active</DropdownMenuItem>
+                  <DropdownMenuItem>Expired</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
 
-              <Button variant="outline">
-                Physio’s Plan
-                <ChevronDown />
-              </Button>
-              <Button variant="outline">
-                Service Type
-                <ChevronDown />
-              </Button>
-              <Button variant="outline">
-                Approved
-                <ChevronDown />
-              </Button>
+              {/* Physio’s Plan Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Physio’s Plan
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Basic</DropdownMenuItem>
+                  <DropdownMenuItem>Premium</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Date Filter
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Today</DropdownMenuItem>
+                  <DropdownMenuItem>Yesterday</DropdownMenuItem>
+                  <DropdownMenuItem>Custom</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Service Type Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Service Type
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Home</DropdownMenuItem>
+                  <DropdownMenuItem>Clinic</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Approved Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Approved
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Approved</DropdownMenuItem>
+                  <DropdownMenuItem>Unapproved</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
 
@@ -306,19 +378,36 @@ const Registeredphysios: React.FC = () => {
                       <td>{physio.phone}</td>
                       <td>
                         {" "}
-                        <p className="text-blue-600">{physio.plan}</p>
+                        <p className="text-black flex items-center gap-2">
+                          <span
+                            className={`w-2 h-2 rounded-full ${
+                              physio.plan === "Free Plan"
+                                ? "bg-blue-400"
+                                : physio.plan === "Premium Plan"
+                                ? "bg-yellow-300"
+                                : ""
+                            }`}
+                          ></span>
+                          {physio.plan}
+                        </p>
                         <p className="text-sm text-gray-500">
                           {physio.details}
                         </p>
                       </td>
-                      <td
-                        className={
-                          physio.status === "Approved"
-                            ? "text-green-500"
-                            : "text-red-500"
-                        }
-                      >
-                        {physio.status}
+                      <td>
+                        {" "}
+                        <p className="text-black flex items-center gap-2">
+                          <span
+                            className={`w-2 h-2 rounded-full ${
+                              physio.status === "Approved"
+                                ? "bg-green-600"
+                                : physio.status === "Not Approved"
+                                ? "bg-red-600"
+                                : ""
+                            }`}
+                          ></span>
+                          {physio.status}
+                        </p>
                       </td>
                       <td>
                         <DropdownMenu>
@@ -347,24 +436,61 @@ const Registeredphysios: React.FC = () => {
               placeholder="Search for Physio’s doctor name..."
               className="w-1/3"
             />
-            <div className="flex gap-2">
-              <Button variant="outline">
-                Plan Status:Active,Expired
-                <ChevronDown />
-              </Button>
 
-              <Button variant="outline">
-                Physio’s Plan
-                <ChevronDown />
-              </Button>
-              <Button variant="outline">
-                Service Type
-                <ChevronDown />
-              </Button>
-              <Button variant="outline">
-                Approved
-                <ChevronDown />
-              </Button>
+            <div className="flex gap-2">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Date Filter
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Today</DropdownMenuItem>
+                  <DropdownMenuItem>Yesterday</DropdownMenuItem>
+                  <DropdownMenuItem>Custom</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Plan Status
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Active</DropdownMenuItem>
+                  <DropdownMenuItem>Expired</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Physio’s Plan Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Physio’s Plan
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Basic</DropdownMenuItem>
+                  <DropdownMenuItem>Premium</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              {/* Service Type Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Service Type
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Home</DropdownMenuItem>
+                  <DropdownMenuItem>Clinic</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
 
@@ -390,11 +516,36 @@ const Registeredphysios: React.FC = () => {
                       </td>
                       <td>{physio.type}</td>
                       <td>{physio.phone}</td>
-                      <td className="text-blue-600">{physio.plan}</td>
-                      <td className="p-2">
-                        <p className="font-medium text-green-500">
+                      <td>
+                        {" "}
+                        <p className="text-black flex items-center gap-2">
+                          <span
+                            className={`w-2 h-2 rounded-full ${
+                              physio.plan === "Basic Plan"
+                                ? "bg-blue-400"
+                                : physio.plan === "Premium Plan"
+                                ? "bg-yellow-300"
+                                : ""
+                            }`}
+                          ></span>
+                          {physio.plan}
+                        </p>
+                      </td>
+                      <td>
+                        {" "}
+                        <p className="text-black flex items-center gap-2">
+                          <span
+                            className={`w-2 h-2 rounded-full ${
+                              physio.status === "Approved"
+                                ? "bg-green-400"
+                                : physio.status === "Not Approved"
+                                ? "bg-red-500"
+                                : ""
+                            }`}
+                          ></span>
                           {physio.status}
                         </p>
+                      
                         <p className="text-sm text-gray-500">
                           {physio.details}
                         </p>
@@ -427,23 +578,45 @@ const Registeredphysios: React.FC = () => {
               className="w-1/3"
             />
             <div className="flex gap-2">
-              <Button variant="outline">
-                Plan Status:Active,Expired
-                <ChevronDown />
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Plan Status
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Active</DropdownMenuItem>
+                  <DropdownMenuItem>Expired</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
 
-              <Button variant="outline">
-                Physio’s Plan
-                <ChevronDown />
-              </Button>
-              <Button variant="outline">
-                Service Type
-                <ChevronDown />
-              </Button>
-              <Button variant="outline">
-                Approved
-                <ChevronDown />
-              </Button>
+              {/* Physio’s Plan Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Physio’s Plan
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Basic</DropdownMenuItem>
+                  <DropdownMenuItem>Premium</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              {/* Service Type Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Service Type
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Home</DropdownMenuItem>
+                  <DropdownMenuItem>Clinic</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
 
@@ -469,7 +642,21 @@ const Registeredphysios: React.FC = () => {
                       </td>
                       <td>{physio.type}</td>
                       <td>{physio.phone}</td>
-                      <td className="text-blue-600">{physio.plan}</td>
+                      <td>
+                        {" "}
+                        <p className="text-black flex items-center gap-2">
+                          <span
+                            className={`w-2 h-2 rounded-full ${
+                              physio.plan === "Basic Plan"
+                                ? "bg-blue-400"
+                                : physio.plan === "Premium Plan"
+                                ? "bg-yellow-300"
+                                : ""
+                            }`}
+                          ></span>
+                          {physio.plan}
+                        </p>
+                      </td>
                       <td>
                         <Popover>
                           <PopoverTrigger asChild>
@@ -491,7 +678,7 @@ const Registeredphysios: React.FC = () => {
                               Cancel
                             </Button>
                             <Button className="ml-3 mt-2 bg-green-700">
-                              Approv
+                              Approve
                             </Button>
                           </PopoverContent>
                         </Popover>
@@ -525,14 +712,31 @@ const Registeredphysios: React.FC = () => {
               className="w-1/3"
             />
             <div className="flex gap-2">
-              <Button variant="outline">
-                Physio’s Plan
-                <ChevronDown />
-              </Button>
-              <Button variant="outline">
-                Service Type
-                <ChevronDown />
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Physio’s Plan
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Basic</DropdownMenuItem>
+                  <DropdownMenuItem>Premium</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+              {/* Service Type Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Service Type
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Home</DropdownMenuItem>
+                  <DropdownMenuItem>Clinic</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
               <Dialog
                 open={isModalOpen}
                 onOpenChange={setIsModalOpen}
@@ -595,19 +799,36 @@ const Registeredphysios: React.FC = () => {
                       <td>{physio.phone}</td>
                       <td>
                         {" "}
-                        <p className="text-blue-600">{physio.plan}</p>
+                        <p className="text-black flex items-center gap-2">
+                          <span
+                            className={`w-2 h-2 rounded-full ${
+                              physio.plan === "Free Plan"
+                                ? "bg-blue-400"
+                                : physio.plan === "Premium Plan"
+                                ? "bg-yellow-300"
+                                : ""
+                            }`}
+                          ></span>
+                          {physio.plan}
+                        </p>
                         <p className="text-sm text-gray-500">
                           {physio.details}
                         </p>
                       </td>
-                      <td
-                        className={
-                          physio.status === "Approved"
-                            ? "text-green-500"
-                            : "text-red-500"
-                        }
-                      >
-                        {physio.status}
+                      <td>
+                        {" "}
+                        <p className="text-black flex items-center gap-2">
+                          <span
+                            className={`w-2 h-2 rounded-full ${
+                              physio.status === "Approved"
+                                ? "bg-green-400"
+                                : physio.status === "Not Approved"
+                                ? "bg-red-500"
+                                : ""
+                            }`}
+                          ></span>
+                          {physio.status}
+                        </p>
                       </td>
                       <td>
                         <DropdownMenu>

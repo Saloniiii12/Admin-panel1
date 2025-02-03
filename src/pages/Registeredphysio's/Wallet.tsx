@@ -38,15 +38,15 @@ const Wallet = () => {
               <DropdownMenuItem>Pending</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button className="bg-#039342 hover:bg-#039342">Export</Button>
+          <Button className="bg-[#039342] hover:bg-[#039342]">Export</Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-4 mb-4">
-        <div className="p-4 border rounded-md">Total Earning ₹100</div>
-        <div className="p-4 border rounded-md">Wallet Balance ₹74.1</div>
-        <div className="p-4 border rounded-md">Platform Fee ₹25.9</div>
-        <div className="p-4 border rounded-md">Coins Earned ₹50</div>
+      <div className="grid grid-cols-4 gap-0 mb-4">
+        <div className="p-4 border rounded-none">Total Earning ₹100</div>
+        <div className="p-4 border rounded-none">Wallet Balance ₹74.1</div>
+        <div className="p-4 border rounded-none">Platform Fee ₹25.9</div>
+        <div className="p-4 border rounded-none">Coins Earned ₹50</div>
       </div>
 
       <Tabs defaultValue="withdrawal-request">

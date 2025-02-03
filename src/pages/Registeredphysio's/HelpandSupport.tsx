@@ -22,7 +22,7 @@ const HelpandSupport = () => {
         
   return (
     <div className="p-6">
-    <div className="flex justify-between items-center mb-4">
+    <div className="flex justify-between items-center mb-4" >
       <h2 className="text-xl font-semibold">Help & Supports</h2>
       <div className="flex gap-2">
         <DropdownMenu>
@@ -31,7 +31,6 @@ const HelpandSupport = () => {
             <Button variant="outline">Choose,One Filter</Button>
           </DropdownMenuTrigger>
           <DropdownMenuTrigger asChild>
-            
             <Button variant="outline">Reopened</Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
@@ -42,6 +41,7 @@ const HelpandSupport = () => {
         </DropdownMenu>
         <Button className="bg-[#039342] text-white" variant="outline">Export</Button>
       </div>
+      
     </div>
 
     <Table>

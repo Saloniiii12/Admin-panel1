@@ -34,24 +34,24 @@ const Appointment = () => {
           <Button className="bg-[#039342]">Export</Button>
         </div>
       </div>
-      <div className="grid grid-cols-5 gap-4">
-        <Card className="p-4 text-center">
+      <div className="grid grid-cols-5 gap-0 ">
+        <Card className="p-4 text-center rounded-none">
           <p>Total Appointment</p>
           <p className="text-xl font-bold">15,020</p>
         </Card>
-        <Card className="p-4 text-center">
+        <Card className="p-4 text-center rounded-none">
           <p>Upcoming Consultation</p>
           <p className="text-xl font-bold">2,900</p>
         </Card>
-        <Card className="p-4 text-center">
+        <Card className="p-4 text-center rounded-none">
           <p>Created Treatment</p>
-          <p className="text-xl font-bold">12,999</p>
+          <p className="text-xl font-bold ">12,999</p>
         </Card>
-        <Card className="p-4 text-center">
+        <Card className="p-4 text-center rounded-none">
           <p>Ongoing Treatment</p>
           <p className="text-xl font-bold">2,000</p>
         </Card>
-        <Card className="p-4 text-center">
+        <Card className="p-4 text-center rounded-none">
           <p>Completed Consultation</p>
           <p className="text-xl font-bold">10,120</p>
         </Card>

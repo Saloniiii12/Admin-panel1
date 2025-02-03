@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useNavigate } from "react-router-dom";
-
+import { Link, useLocation } from "react-router-dom";
 const ViewDetail: React.FC = () => {
   const [activeTab, setActiveTab] = useState("basic detail");
   
@@ -26,22 +26,32 @@ const ViewDetail: React.FC = () => {
     const physioId = 3; // Replace this with dynamic ID logic
     navigate(`/edit/${physioId}`);
   };
-  
+ // Breadcrumb Component
+const Breadcrumbs = ({ customPath }: { customPath?: string[] }) => {
+  const location = useLocation();
+  const paths = customPath || location.pathname.split("/").filter((path) => path);
+
+  return (
+    <div className="flex items-center space-x-2 text-gray-500 text-sm mb-4">
+      <Link to="/" className="text-gray-700 hover:underline text-2xl">Registered Physio's</Link>
+      {paths.map((path, index) => (
+        <div key={index} className="flex items-center space-x-2">
+          <ChevronRight className="w-4 h-4 text-gray-400" />
+          <Link to={`/${paths.slice(0, index + 1).join("/")}`} className="hover:underline capitalize">
+            {path.replace("-", "")}
+          </Link>
+        </div>
+      ))}
+    </div>
+  );
+};
   return (
     <div className="bg-gray-100 min-h-screen p-6">
       {/* Title Section */}
       <div className="flex justify-between items-center mb-4">
         {/* Breadcrumbs Section */}
-        <div className="flex items-center space-x-2 mb-6">
-          <button className="bg-gray-100 text-2xl font-semibold">
-            Registered Physios
-          </button>
-          <span>
-            <ChevronRight />
-          </span>
-          <button className="bg-gray-100 text-lg">Physio's detail</button>
-        </div>
-
+  
+    <Breadcrumbs />
         <div className="flex items-center space-x-3 ml-auto">
           <Button className="bg-white text-black hover:bg-gray-200">
             Block Physio
