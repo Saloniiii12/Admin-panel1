@@ -3,12 +3,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import {
-  ChevronLeft,
-  ChevronRight,
   ChevronDown,
   MoreVertical,
   Lock,
+Search,
 } from "lucide-react";
+import image from "@/assets/Export (1).png"
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -38,6 +38,7 @@ const physios = [
     plan: "Free Plan",
     details: "0/4 Patient",
     status: "Not Approved",
+    date:"No data available",
   },
   {
     name: "Demi Wilkinson",
@@ -47,6 +48,7 @@ const physios = [
     plan: "Premium Plan",
     details: "Paid on 20 Oct 2024 at 4 30 PM",
     status: "Approved",
+    date:"On 20 Oct 2024 at 4 AM",
   },
   {
     name: "Candice Wu",
@@ -56,6 +58,7 @@ const physios = [
     plan: "Free Plan",
     details: "0/4 Patient",
     status: "Not Approved",
+    date:"No data available",
   },
   {
     name: "Drew Cano",
@@ -65,6 +68,7 @@ const physios = [
     plan: "Premium Plan",
     details: "Paid on 20 Oct 2024 at 4 30 PM",
     status: "Approved",
+    date:"On 20 Oct 2024 at 4 AM",
   },
   {
     name: "Orlando Diggs",
@@ -74,6 +78,7 @@ const physios = [
     plan: "Free Plan",
     details: "0/4 PAtient",
     status: "Not Approved",
+    date:"No data available",
   },
   {
     name: "Andi Lane",
@@ -83,6 +88,7 @@ const physios = [
     plan: "Premium Plan",
     details: "Paid on 20 Oct 2024 at 4 30 PM",
     status: "Approved",
+    date:"On 20 Oct 2024 at 4 AM",
   },
 ];
 const approvedphysios = [
@@ -94,6 +100,7 @@ const approvedphysios = [
     plan: "Basic Plan",
     details: "0/4 Patient",
     status: "Approved",
+    date:"On 23 Oct 2024 at 4 AM",
   },
   {
     name: "Demi Wilkinson",
@@ -103,6 +110,7 @@ const approvedphysios = [
     plan: "Premium Plan",
     details: "Paid on 20 Oct 2024 at 4 30 PM",
     status: "Approved",
+    date:"On 23 Oct 2024 at 4 AM",
   },
   {
     name: "Candice Wu",
@@ -112,6 +120,7 @@ const approvedphysios = [
     plan: "Basic Plan",
     details: "0/4 Patient",
     status: "Approved",
+    date:"On 23 Oct 2024 at 4 AM",
   },
   {
     name: "Drew Cano",
@@ -121,6 +130,7 @@ const approvedphysios = [
     plan: "Premium Plan",
     details: "Paid on 20 Oct 2024 at 4 30 PM",
     status: "Approved",
+    date:"On 23 Oct 2024 at 4 AM",
   },
   {
     name: "Orlando Diggs",
@@ -130,6 +140,7 @@ const approvedphysios = [
     plan: "Basic Plan",
     details: "0/4 Patient",
     status: "Approved",
+    date:"On 23 Oct 2024 at 4 AM",
   },
   {
     name: "Andi Lane",
@@ -139,6 +150,7 @@ const approvedphysios = [
     plan: "Premium Plan",
     details: "Paid on 20 Oct 2024 at 4 30 PM",
     status: "Approved",
+    date:"On 23 Oct 2024 at 4 AM",
   },
 ];
 const unapprovedphysios = [
@@ -208,47 +220,62 @@ const Registeredphysios: React.FC = () => {
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      <div className="flex justify-end items-center mb-6">
-        <h1 className="mr-auto font-semibold text-2xl">Registered Physio's</h1>
-        <div className="flex items-center gap-4">
-          <Button variant="outline">
-            All Time <ChevronDown />
-          </Button>
-          <Button variant="outline">Add Physio's +</Button>
-          <Button
-            variant="outline"
-            className="bg-[#039342] text-white hover:bg-[#039342] hover:text-white"
-          >
-            Export
-          </Button>
-        </div>
-      </div>
+    <div className="flex justify-end items-center mb-6">
+    <div className="flex items-center gap-5 mr-auto flex-row">
+      <h1 className="font-semibold text-2xl">Registered Physio's</h1>
+      <p className="text-lg text-black bg-[#E6F4EC]">(15,000 Physio's)</p>
+    </div>
+    <div className="flex items-center gap-4">
+    <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    All Time
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Week</DropdownMenuItem>
+                  <DropdownMenuItem>Month</DropdownMenuItem>
+                  <DropdownMenuItem>Year</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+      <Button variant="outline">Add Physio's +</Button>
+      <Button
+        variant="outline"
+        className="bg-[#039342] text-white hover:bg-[#039342] hover:text-white"
+      >
+        <img src={image} alt="Export Icon" className="w-5 h-5" />
+        Export
+      </Button>
+    </div>
+  </div>
+  
       <div className="grid grid-cols-5 gap-0 ">
         <Card className="p-4 text-center rounded-none">
           <p>Total Physio's</p>
-          <p className="text-xl font-bold">12,999</p>
+          <p className="text-xl font-semibold">12,999</p>
         </Card>
         <Card className="p-4 text-center rounded-none">
           <p>Approved Physio's</p>
-          <p className="text-xl font-bold">12,900</p>
+          <p className="text-xl font-semibold">12,900</p>
         </Card>
         <Card className="p-4 text-center rounded-none">
           <p>Premium Plan Physio's</p>
-          <p className="text-xl font-bold ">10,120</p>
+          <p className="text-xl font-semibold ">10,120</p>
         </Card>
         <Card className="p-4 text-center rounded-none">
           <p>Free Plan Physio's</p>
-          <p className="text-xl font-bold">2,000</p>
+          <p className="text-xl font-semibold">2,000</p>
         </Card>
         <Card className="p-4 text-center rounded-none">
           <p>Pending Physio's</p>
-          <p className="text-xl font-bold">2,900</p>
+          <p className="text-xl font-semibold">2,900</p>
         </Card>
       </div>
       {/* Tabs */}
 
       <Tabs defaultValue="all">
-        <TabsList className="flex p-2 mt-5 bg-gray-50 justify-start">
+        <TabsList className="flex p-2 mt-5 bg-gray-50 justify-start ">
           <TabsTrigger
             className="border-b-2 rounded-none shadow-none border-gray-200  data-[state=active]:text-green-500 data-[state=active]:border-green-500 data-[state=active]:bg-gray-50"
             value="all"
@@ -278,10 +305,13 @@ const Registeredphysios: React.FC = () => {
         <TabsContent value="all">
           {/* Search & Filters */}
           <div className="flex justify-between my-4">
-            <Input
-              placeholder="Search for Physio’s doctor name..."
-              className="w-1/3"
-            />
+          <div className="relative w-1/3">
+      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
+      <Input
+        placeholder="Search for Physio’s doctor name..."
+        className="pl-10"
+      />
+    </div>
             <div className="flex gap-2">
               {/* Plan Status Dropdown */}
               <DropdownMenu>
@@ -297,19 +327,7 @@ const Registeredphysios: React.FC = () => {
                 </DropdownMenuContent>
               </DropdownMenu>
 
-              {/* Physio’s Plan Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline">
-                    Physio’s Plan
-                    <ChevronDown className="ml-2" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem>Basic</DropdownMenuItem>
-                  <DropdownMenuItem>Premium</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline">
@@ -323,8 +341,21 @@ const Registeredphysios: React.FC = () => {
                   <DropdownMenuItem>Custom</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-
-              {/* Service Type Dropdown */}
+              {/* Physio’s Plan Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Physio’s Plan
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Basic</DropdownMenuItem>
+                  <DropdownMenuItem>Premium</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+{/* 
+              Service Type Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline">
@@ -408,6 +439,9 @@ const Registeredphysios: React.FC = () => {
                           ></span>
                           {physio.status}
                         </p>
+                        <p className="text-sm text-gray-500">
+                          {physio.date}
+                        </p>
                       </td>
                       <td>
                         <DropdownMenu>
@@ -418,7 +452,8 @@ const Registeredphysios: React.FC = () => {
                             <DropdownMenuItem onClick={handleViewClick}>
                               View Profile{" "}
                             </DropdownMenuItem>
-                            <DropdownMenuItem>Delete</DropdownMenuItem>
+                            <DropdownMenuItem>Edit</DropdownMenuItem>
+                            <DropdownMenuItem>Block</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </td>
@@ -432,10 +467,13 @@ const Registeredphysios: React.FC = () => {
         <TabsContent value="approved">
           {/* Search & Filters */}
           <div className="flex justify-between my-4">
-            <Input
-              placeholder="Search for Physio’s doctor name..."
-              className="w-1/3"
-            />
+          <div className="relative w-1/3">
+      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
+      <Input
+        placeholder="Search for Physio’s doctor name..."
+        className="pl-10"
+      />
+    </div>
 
             <div className="flex gap-2">
               <DropdownMenu>
@@ -530,6 +568,9 @@ const Registeredphysios: React.FC = () => {
                           ></span>
                           {physio.plan}
                         </p>
+                        <p className="text-sm text-gray-500">
+                          {physio.details}
+                        </p>
                       </td>
                       <td>
                         {" "}
@@ -545,9 +586,8 @@ const Registeredphysios: React.FC = () => {
                           ></span>
                           {physio.status}
                         </p>
-                      
                         <p className="text-sm text-gray-500">
-                          {physio.details}
+                          {physio.date}
                         </p>
                       </td>
                       <td>
@@ -559,7 +599,8 @@ const Registeredphysios: React.FC = () => {
                             <DropdownMenuItem onClick={handleViewClick}>
                               View Profile
                             </DropdownMenuItem>
-                            <DropdownMenuItem>Delete</DropdownMenuItem>
+                            <DropdownMenuItem>Edit</DropdownMenuItem>
+                            <DropdownMenuItem>Block</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </td>
@@ -573,10 +614,13 @@ const Registeredphysios: React.FC = () => {
         <TabsContent value="unapproved">
           {/* Search & Filters */}
           <div className="flex justify-between my-4">
-            <Input
-              placeholder="Search for Physio’s doctor name..."
-              className="w-1/3"
-            />
+          <div className="relative w-1/3">
+      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
+      <Input
+        placeholder="Search for Physio’s doctor name..."
+        className="pl-10"
+      />
+    </div>
             <div className="flex gap-2">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -656,12 +700,15 @@ const Registeredphysios: React.FC = () => {
                           ></span>
                           {physio.plan}
                         </p>
+                        <p className="text-sm text-gray-500">
+                          {physio.details}
+                        </p>
                       </td>
                       <td>
                         <Popover>
                           <PopoverTrigger asChild>
                             <Button className="bg-[#DFF1E7] hover:bg-[#DFF1E7] text-[#039342]">
-                              Approved
+                              Approve
                             </Button>
                           </PopoverTrigger>
                           <PopoverContent className="w-60  shadow-lg bg-white p-4 rounded-md right-0 absolute">
@@ -693,7 +740,8 @@ const Registeredphysios: React.FC = () => {
                               View Profile
                             </DropdownMenuItem>
 
-                            <DropdownMenuItem>Delete</DropdownMenuItem>
+                            <DropdownMenuItem>Edit</DropdownMenuItem>
+                            <DropdownMenuItem>Block</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </td>
@@ -707,10 +755,13 @@ const Registeredphysios: React.FC = () => {
         <TabsContent value="blocked">
           {/* Search & Filters */}
           <div className="flex justify-between my-4">
-            <Input
-              placeholder="Search for Physio’s doctor name..."
-              className="w-1/3"
-            />
+          <div className="relative w-1/3">
+      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
+      <Input
+        placeholder="Search for Physio’s doctor name..."
+        className="pl-10"
+      />
+    </div>
             <div className="flex gap-2">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -752,7 +803,9 @@ const Registeredphysios: React.FC = () => {
                     <Lock />
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="w-80 p-6 ">
+
+              <DialogContent className="absolute right-96 top-3/4 -translate-y-52 ml-96 w-80 p-6 shadow-lg bg-white border border-gray-300 rounded-lg ">
+
                   <DialogHeader>
                     <DialogTitle>Block Physio</DialogTitle>
                   </DialogHeader>
@@ -768,7 +821,7 @@ const Registeredphysios: React.FC = () => {
                     placeholder="Enter reason to block physio"
                     className="mb-4"
                   />
-                  <Button className="bg-[#039342] text-white w-full">
+                  <Button className="bg-[#039342] text-white w-full hover:bg-[#039342]">
                     Save & Block Physio
                   </Button>
                 </DialogContent>
@@ -821,13 +874,16 @@ const Registeredphysios: React.FC = () => {
                           <span
                             className={`w-2 h-2 rounded-full ${
                               physio.status === "Approved"
-                                ? "bg-green-400"
+                                ? "bg-green-600"
                                 : physio.status === "Not Approved"
-                                ? "bg-red-500"
+                                ? "bg-red-600"
                                 : ""
                             }`}
                           ></span>
                           {physio.status}
+                        </p>
+                        <p className="text-sm text-gray-500">
+                          {physio.date}
                         </p>
                       </td>
                       <td>
@@ -839,7 +895,8 @@ const Registeredphysios: React.FC = () => {
                             <DropdownMenuItem onClick={handleViewClick}>
                               View Profile
                             </DropdownMenuItem>
-                            <DropdownMenuItem>Delete</DropdownMenuItem>
+                            <DropdownMenuItem>Edit</DropdownMenuItem>
+                            <DropdownMenuItem>Block</DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </td>
@@ -853,19 +910,26 @@ const Registeredphysios: React.FC = () => {
       </Tabs>
       {/* Pagination */}
       <div className="flex justify-between items-center mt-6">
-        <Button variant="outline">
-          <ChevronLeft />
-        </Button>
-        <div className="flex gap-2">
-          {[1, 2, 3, 4, 5].map((num) => (
-            <Button key={num} variant={num === 1 ? "default" : "outline"}>
-              {num}
-            </Button>
-          ))}
-        </div>
-        <Button variant="outline">
-          <ChevronRight />
-        </Button>
+      <Button className="bg-white px-4 py-2 text-black hover:bg-white hover:text-black rounded">
+            Previous
+          </Button>
+          <div>
+            {[...Array(10)].map((_, index) => (
+              <Button
+                key={index}
+                className={`px-3 py-1 mx-1 rounded ${
+                  index === 0
+                    ? "bg-[#F9F5FF] text-[#7F56D9]"
+                    : "bg-gray-200 hover:bg-[#F9F5FF] hover:text-[#7F56D9]"
+                }`}
+              >
+                {index + 1}
+              </Button>
+            ))}
+          </div>
+          <Button className="bg-white text-black hover:bg-white hover:text-black px-4 py-2 rounded">
+            Next
+          </Button>
       </div>
     </div>
   );

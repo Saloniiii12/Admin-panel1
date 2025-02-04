@@ -57,9 +57,11 @@ const Breadcrumbs = ({ customPath }: { customPath?: string[] }) => {
             Block Physio
             <Lock />
           </Button>
-          <Button className="bg-white text-black hover:bg-gray-200 ml-auto mr-4">
-            Approved
-          </Button>
+          <Button className="bg-white text-black hover:bg-gray-200 ml-auto mr-4 flex items-center gap-2">
+  Approved
+  <span className="w-2 h-2 bg-[#039342] rounded-full"></span>
+</Button>
+
           <Button className="bg-[#039342] text-white hover:bg-green-700">
             <Crown />
             Premium Plan

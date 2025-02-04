@@ -2,7 +2,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./ui/dropdown-menu";
 import logo from "../assets/User.png";
 import { useNavigate } from "react-router-dom";
-import{Bell} from "lucide-react";
+import{Bell, Search} from "lucide-react";
+import { Input } from "./ui/input";
 const Navbar = () => {
 	const navigate = useNavigate();
 
@@ -15,19 +16,21 @@ const Navbar = () => {
 
 	return (
 		<div className="bg-white w-full h-16">
-			<div className="px-8 h-full flex justify-between items-center">
-      <div className="flex items-center gap-4">
+			<div className="px-8 w-full h-full flex justify-between items-center">
+      <div className="flex items-center w-full justify-between mr-8">
         {/* Search Bar */}
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Search"
-            className="bg-gray-200 text-sm rounded-lg px-8 py-2 focus:outline-none focus:ring-2 focus:ring-green-500"
-          />
+        
+		<div className="relative">
+      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
+      <Input
+        placeholder="Search"
+        className="pl-10"
+      />
+   
         </div>
        
 				<div
-					className="relative cursor-pointer"
+					className="relative cursor-pointer  "
 					onClick={() => navigate("/notification")}
 				>
 					<Bell className="w-5 h-5 ml-auto " />
