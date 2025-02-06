@@ -1,11 +1,12 @@
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-
+import wallet from "@/assets/Frame 1000006867.png";
+import Funnel from "@/assets/FunnelSimple.png";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Filter } from "lucide-react";
+import image from "@/assets/Export (1).png";
 
 const data = [
   { date: "10 Jan 2025", balance: "₹ 5000", amount: "₹ 2000", status: "Pending" },
@@ -38,15 +39,43 @@ const Wallet = () => {
               <DropdownMenuItem>Pending</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button className="bg-[#039342] hover:bg-[#039342]">Export</Button>
+          <Button
+        variant="outline"
+        className="bg-[#039342] text-white hover:bg-[#039342] hover:text-white"
+      >
+        <img src={image} alt="Export Icon" className="w-5 h-5" />
+        Export
+      </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-0 mb-4">
-        <div className="p-4 border rounded-none">Total Earning ₹100</div>
-        <div className="p-4 border rounded-none">Wallet Balance ₹74.1</div>
-        <div className="p-4 border rounded-none">Platform Fee ₹25.9</div>
-        <div className="p-4 border rounded-none">Coins Earned ₹50</div>
+      <div className="grid grid-cols-6 gap-0 mb-4 ">
+      <div className="p-4 border flex items-center gap-2 rounded-none">
+  <img src={wallet} alt="Export Icon" className="w-6 h-6" />
+  <span>Total Earning ₹100</span>
+</div>
+      <div className="p-4 border flex items-center gap-2 rounded-none">
+  <img src={wallet} alt="Export Icon" className="w-6 h-6" />
+  <span>Wallet Balance ₹74.1</span>
+</div>
+      <div className="p-4 border flex items-center gap-2 rounded-none">
+  <img src={wallet} alt="Export Icon" className="w-6 h-6" />
+  <span>PhysioPlus Earning ₹10</span>
+</div>
+      <div className="p-4 border flex items-center gap-2 rounded-none">
+  <img src={wallet} alt="Export Icon" className="w-6 h-6" />
+  <span>Coins Earned ₹50</span>
+</div>
+      <div className="p-4 border flex items-center gap-2 rounded-none">
+  <img src={wallet} alt="Export Icon" className="w-6 h-6" />
+  <span>GST ₹18</span>
+</div>
+      <div className="p-4 border flex items-center gap-2 rounded-none">
+  <img src={wallet} alt="Export Icon" className="w-6 h-6" />
+  <span>Physio Earning ₹5</span>
+</div>
+       
+        
       </div>
 
       <Tabs defaultValue="withdrawal-request">
@@ -56,9 +85,44 @@ const Wallet = () => {
           <TabsTrigger value="withdrawal-approved">Withdrawal Approved</TabsTrigger>
         </TabsList>
         <div className="flex gap-4 items-center">
-        <Button variant={"outline"}><Filter/>Payment Type Filter</Button>       
-         <Button variant={"outline"}><Filter/>Data Filters</Button>
-        <Button className="bg-[#039342] hover:bg-[#039342]">Export</Button>
+        <Button
+        variant="outline"
+        className="flex items-center"
+      >
+       
+        Payment Type Filter
+        <img src={Funnel} className="w-4 h-4" />
+      </Button>     
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+            <Button
+        variant="outline"
+        className="flex items-center"
+      >
+    
+        Date Filter
+        <img src={Funnel} className="w-4 h-4" />
+      </Button>  
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+              <DropdownMenuItem >
+                Today
+              </DropdownMenuItem>
+              <DropdownMenuItem >
+                Yesterday
+              </DropdownMenuItem>
+              <DropdownMenuItem >
+                Custom
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <Button
+        variant="outline"
+        className="bg-[#039342] text-white hover:bg-[#039342] hover:text-white"
+      >
+        <img src={image} alt="Export Icon" className="w-5 h-5" />
+        Export
+      </Button>
 
         </div>
        

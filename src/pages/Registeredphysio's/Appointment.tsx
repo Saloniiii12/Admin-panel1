@@ -15,11 +15,13 @@ import {
 } from "@/components/ui/table";
 import { Table, TableHeader } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Info, MoreVertical } from "lucide-react";
+import { Info, MoreVertical,Eye,Lock} from "lucide-react";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
-
+import Invoice from "@/assets/Invoice.png";
+import Vector from "@/assets/Vector (4).png";
+import Export from "@/assets/Export (1).png";
 const Appointment = () => {
   const [selectedAppointment, setSelectedAppointment] = useState<
     string | number | null
@@ -96,11 +98,17 @@ const Appointment = () => {
               <SelectValue placeholder="Filter Any" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="cash">Cash</SelectItem>
-              <SelectItem value="online">Online</SelectItem>
+              <SelectItem value="cash">Consultation</SelectItem>
+              <SelectItem value="online">Treatment</SelectItem>
             </SelectContent>
           </Select>
-          <Button className="bg-[#039342]">Export</Button>
+          <Button
+        variant="outline"
+        className="bg-[#039342] text-white hover:bg-[#039342] hover:text-white"
+      >
+        <img src={Export} alt="Export Icon" className="w-5 h-5" />
+        Export
+      </Button>
         </div>
       </div>
       <div className="grid grid-cols-5 gap-0 ">
@@ -243,20 +251,24 @@ const Appointment = () => {
           <MoreVertical className="w-5 h-5" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-48 bg-black text-white">
+      <DropdownMenuContent className="w-56 bg-black text-white">
         <DropdownMenuItem onClick={handleViewDetails}>
+          <Eye/>
           View Appointment Details
         </DropdownMenuItem>
         <hr />
         <DropdownMenuItem >
+        <img src={Vector}  className="w-4 h-4" />
           View Patient Profile 
         </DropdownMenuItem>
         <hr />
         <DropdownMenuItem onClick={handleOpen}>
+        <img src={Invoice}  className="w-4 h-4" />
           Bill Summary(Physio End)
         </DropdownMenuItem>
         <hr />
         <DropdownMenuItem >
+          <Lock/>
           Block Patient
         </DropdownMenuItem>
       </DropdownMenuContent>
@@ -283,6 +295,14 @@ const Appointment = () => {
           }`}
         >
           Appointment Details
+        </button>
+        <button
+          onClick={() => setActiveTab("treatment")}
+          className={`py-2 px-4 text-sm font-semibold focus:outline-none ${
+            activeTab === "treatment" ? "border-b-2 border-green-500 text-green-500" : "text-gray-500"
+          }`}
+        >
+         Treatment Details
         </button>
         <button
           onClick={() => setActiveTab("payment")}
@@ -399,8 +419,101 @@ const Appointment = () => {
             </textarea>
           </div>
         </div>
-      )
-}
+      )}
+        {activeTab === "treatment" &&  (  <div className="grid grid-cols-2 gap-4 mt-0 ">
+          <div>
+           
+            <label className="text-gray-600">Treatment Date</label>
+            <input
+              type="text"
+              value="30 Jan 2025"
+              className="w-full p-2 mt-1 border rounded bg-gray-100"
+              disabled
+            />
+          </div>
+          <div>
+            <label className="text-gray-600">Appointment Time</label>
+            <input
+              type="text"
+              value="4:00 PM"
+              className="w-full p-2 mt-1 border rounded bg-gray-100"
+              disabled
+            />
+          </div>
+          <div>
+            <label className="text-gray-600">Payment Method</label>
+            <input
+              type="text"
+              value="Cash"
+              className="w-full p-2 mt-1 border rounded bg-gray-100"
+              disabled
+            />
+          </div>
+          <div>
+            <label className="text-gray-600">Booking Date</label>
+            <input
+              type="text"
+              value="20 Jan 2025"
+              className="w-full p-2 mt-1 border rounded bg-gray-100"
+              disabled
+            />
+          </div>
+          <div>
+            <label className="text-gray-600">Consultation Charges</label>
+            <input
+              type="text"
+              value="₹ 950"
+              className="w-full p-2 mt-1 border rounded bg-gray-100"
+              disabled
+            />
+          </div>
+          <div>
+            <label className="text-gray-600">Payment Date</label>
+            <input
+              type="text"
+              value="20 Jan 2025"
+              className="w-full p-2 mt-1 border rounded bg-gray-100"
+              disabled
+            />
+          </div>
+          <div>
+            <label className="text-gray-600">Rescheduled Appointment Date</label>
+            <input
+              type="text"
+              value="30 Jan 2025"
+              className="w-full p-2 mt-1 border rounded bg-gray-100"
+              disabled
+            />
+          </div>
+          <div>
+            <label className="text-gray-600">Rescheduled Appointment Time</label>
+            <input
+              type="text"
+              value="4:00 PM"
+              className="w-full p-2 mt-1 border rounded bg-gray-100"
+              disabled
+            />
+          </div>
+          <div className="col-span-2">
+            <label className="text-gray-600">Patient Problem</label>
+            <textarea
+              className="w-full p-2 mt-1 border rounded bg-gray-100"
+             
+              disabled
+            >
+            </textarea>
+          </div>
+          <div className="col-span-2">
+            <label className="text-gray-600">Physio Prescription</label>
+            <textarea
+              className="w-full p-2 mt-1 border rounded bg-gray-100"
+              
+              disabled
+            >
+            </textarea>
+          </div>
+        </div>
+      )}
         {activeTab === "payment" && (<div className="mt-0 space-y-2 text-sm text-gray-700">
                             <p className=" flex justify-between ">
                               <span className="font-semibold">
@@ -431,8 +544,8 @@ const Appointment = () => {
       </div>
     </DialogContent>
       </Dialog>
-      <Dialog open={open} onOpenChange={setOpen}>
-  <DialogContent>
+      <Dialog open={open} onOpenChange={setOpen} >
+  <DialogContent >
     <div className="mt-0 space-y-2 text-sm text-gray-700">
       <h3 className="mt-0 font-bold">Bill Summary</h3>
                             <p className=" flex justify-between ">

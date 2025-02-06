@@ -4,7 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Filter, MoreVertical } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import Export from "@/assets/Export (1).png";
 interface SubscriptionPlan {
   name: string;
   total: string;
@@ -112,19 +113,45 @@ const Subscriptionplan = () => {
     </div>
       <Card>
         <CardContent>
-          <div className="flex justify-between items-center mb-4">
-            <div className="flex gap-4 items-center mt-6">
+        <div className="flex justify-between items-center mb-4">
+ 
+  <h1 className="text-lg font-semibold">Subscription history/Payment</h1>
+
+
+  <div className="flex gap-4 mt-6">
+    <Button variant="outline" className="flex items-center">
+      <Filter className="mr-2 h-4 w-4" />
+      Payment Type Filter
+    </Button>
+    <DropdownMenu>
+            <DropdownMenuTrigger asChild>
               <Button variant="outline" className="flex items-center">
                 <Filter className="mr-2 h-4 w-4" />
-                Payment Type Filter
+                 Date Filter
               </Button>
-              <Button variant="outline" className="flex items-center">
-                <Filter className="mr-2 h-4 w-4" />
-                Date Filters
-              </Button>
-              <Button variant="outline" className="flex items-center">Export</Button>
-            </div>
-          </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start">
+              <DropdownMenuItem >
+                Today
+              </DropdownMenuItem>
+              <DropdownMenuItem >
+                Yesterday
+              </DropdownMenuItem>
+              <DropdownMenuItem >
+                Custom
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <Button
+        variant="outline"
+        className="bg-[#039342] text-white hover:bg-[#039342] hover:text-white"
+      >
+        <img src={Export} alt="Export Icon" className="w-5 h-5" />
+        Export
+      </Button>
+  </div>
+</div>
+
 
           <Table className="w-full">
             <TableHeader>

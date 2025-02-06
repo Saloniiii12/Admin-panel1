@@ -116,7 +116,8 @@ const Basicdetail = () => {
                   {degreeImages.length > 0 && renderDegreeImages()}
                 </div>
               </div>
-
+              <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+              <h3 className="font-semibold mb-2">Achievement Images</h3></div>
               <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
                 <h3 className="font-semibold mb-2">Specialization</h3>
                 <p>General Pain, Ortho Pain</p>
@@ -125,6 +126,10 @@ const Basicdetail = () => {
               <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
                 <h3 className="font-semibold mb-2">Sub-Specialization</h3>
                 <p>Elbow Pain, Neck Pain, Leg Pain, Head Pain, Back Pain</p>
+              </div>
+              <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+                <h3 className="font-semibold mb-2">Like to treat insurance patient?</h3>
+                <p>No</p>
               </div>
 
               <div className="flex space-x-4">
@@ -140,6 +145,10 @@ const Basicdetail = () => {
 
               <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
                 <h3 className="font-semibold mb-2">IAP certificate</h3>
+              </div>
+              <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+                <h3 className="font-semibold mb-2">IAP Registered</h3>
+                <p>No</p>
               </div>
             </div>
           </CardContent>
@@ -250,22 +259,31 @@ const Basicdetail = () => {
       </CardHeader>
       {openCardId===3 && (
               <CardContent>
-                <div className="space-y-4">
-                <div className="flex space-x-4">
-                    <div className="border p-4 mt-4 rounded-lg shadow-sm bg-gray-100 flex-1">
-                      <h3 className="font-semibold mb-2">Pincode Where you serve</h3>
-                      <p>302020</p>
+                 <div className="flex space-x-4 mt-4">
+                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
+                      <h3 className="font-semibold mb-2">Pincode Where You Serve</h3>
+                      <p>322201</p>
                     </div>
-                    <div className="border p-4 mt-4 rounded-lg shadow-sm bg-gray-100 flex-1">
-                      <h3 className="font-semibold mb-2">Consultation Fees</h3>
-                      <p>₹ 450</p>
-                    </div>
-                    <div className="border p-4 mt-4 rounded-lg shadow-sm bg-gray-100 flex-1">
-                      <h3 className="font-semibold mb-2">Consultation Duration</h3>
+                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
+                      <h3 className="font-semibold mb-2">
+                        Consultation Duration
+                      </h3>
                       <p>30 minutes</p>
                     </div>
                   </div>
-                  <h3 className="text-semibold">Working Days and Time</h3>
+                 <div className="flex space-x-4 mt-4">
+                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
+                      <h3 className="font-semibold mb-2">Consultation Fees For 5 km </h3>
+                      <p>₹450</p>
+                    </div>
+                    <div className="border p-4 rounded-lg shadow-sm bg-gray-100 flex-1">
+                      <h3 className="font-semibold mb-2">
+                      Consultation Fees For 10 km
+                      </h3>
+                      <p>₹450</p>
+                    </div>
+                  </div>
+                  <h3 className="text-semibold mt-4 mb-4">Working Days and Time</h3>
                   <div className="flex items-center justify-between p-4 border rounded-lg shadow-sm w-[350px] bg-gray-100">
       <span className="font-medium text-lg">Sunday</span>
       <div className="flex flex-col gap-2 text-green-600 text-sm">
@@ -287,7 +305,6 @@ const Basicdetail = () => {
       </div>
     </div>
                  
-                </div>
               </CardContent>
       )}
             </Card>
@@ -316,27 +333,7 @@ const Basicdetail = () => {
                     </div>
                   
                   </div>
-                  <h3 className="text-semibold">Working Days and Time</h3>
-                  <div className="flex items-center justify-between p-4 border rounded-lg shadow-sm w-[350px] bg-gray-100">
-      <span className="font-medium text-lg">Sunday</span>
-      <div className="flex flex-col gap-2 text-green-600 text-sm">
-        <div className="flex gap-1">
-          <span>10:00</span>
-          <span>AM</span>
-          <span>To</span>
-          <span>12:00</span>
-          <span>PM</span>
-        </div>
-        <hr/>
-        <div className="flex gap-1">
-          <span>3:00</span>
-          <span>PM</span>
-          <span>To</span>
-          <span>4:00</span>
-          <span>PM</span>
-        </div>
-      </div>
-    </div>
+                
                  
                 </div>
               </CardContent>

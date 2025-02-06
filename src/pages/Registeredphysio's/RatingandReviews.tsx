@@ -1,6 +1,6 @@
 import { Table, TableHeader } from "@/components/ui/table"; 
 import { Card, CardContent } from "@/components/ui/card";
-import { Filter } from "lucide-react";
+import funnel from "@/assets/FunnelSimple.png";
 import {  TableBody, TableCell, TableHead, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button"; 
 import {
@@ -9,43 +9,44 @@ import {
     DropdownMenuContent,
     DropdownMenuItem,
   } from "@/components/ui/dropdown-menu";
+  import Export from "@/assets/Export (1).png";
   const RatingandReviews = () => {
   return (
     <div className="p-6">
-    <Card className="mb-6">
-      <CardContent className="flex justify-between items-center">
-        <div className="text-center mt-5">
-          <h3 className="text-lg font-semibold">Total Reviews</h3>
-          <p className="text-2xl">15,020</p>
-        </div>
-        <div className="text-center mt-5">
-          <h3 className="text-lg font-semibold">Total Rating</h3>
-          <p className="text-2xl">2,900</p>
-        </div>
-        <div className="text-center mt-5">
-          <h3 className="text-lg font-semibold">Average Rating</h3>
-          <p className="text-2xl">4.2 Star</p>
-        </div>
-      </CardContent>
-    </Card>
-
-    <Card>
+       <div className="grid grid-cols-3 gap-0 ">
+       <Card className="p-4 text-center rounded-none">
+          <p>Total Reviews</p>
+          <p className="text-xl font-semibold">15,020</p>
+        </Card>
+        <Card className="p-4 text-center rounded-none">
+          <p>Total Rating</p>
+          <p className="text-xl font-semibold">2,900</p>
+        </Card>
+        <Card className="p-4 text-center rounded-none">
+          <p>Average Rating</p>
+          <p className="text-xl font-semibold ">4.2 Star</p>
+        </Card>
+</div>
+    <Card className="mt-4">
       <CardContent>
         <div className="flex justify-between items-center mb-4 mt-6">
-          
+          <h2 className="font-semibold text-xl">Rating & Reviews</h2>
           <div className="flex gap-4 items-center">
             <Button variant="outline" className="flex items-center">
-              <Filter className="mr-2 h-4 w-4" />
+            <img src={funnel} className="w-4 h-4" />
               Rating 4, 5, 3
             </Button>
             <Button variant="outline" className="flex items-center">
-              <Filter className="mr-2 h-4 w-4" />
+            <img src={funnel} className="w-4 h-4" />
               Consultation
             </Button>
-            <Button variant="outline" className="flex items-center">
-       
-              Export
-            </Button>
+            <Button
+        variant="outline"
+        className="bg-[#039342] text-white hover:bg-[#039342] hover:text-white"
+      >
+        <img src={Export} alt="Export Icon" className="w-5 h-5" />
+        Export
+      </Button>
           </div>
         </div>
 
@@ -77,7 +78,7 @@ import {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                       <DropdownMenuItem>Edit</DropdownMenuItem>
-                      <DropdownMenuItem>Delete</DropdownMenuItem>
+                      <DropdownMenuItem>Block</DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
                 </TableCell>

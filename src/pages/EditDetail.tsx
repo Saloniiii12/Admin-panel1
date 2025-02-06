@@ -9,7 +9,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Pencil } from "lucide-react";
+import { ChevronRight, Pencil } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const EditDetail = () => {
   const [formData, setFormData] = useState({
@@ -33,9 +34,10 @@ const EditDetail = () => {
     IAPRegistered: "Yes",
     IAPnumber: "8750123645112100",
     Pincode: "302020",
-    ConsultationFees: "450",
+    ConsultationFees: "₹450",
     ConsultationDuration: "30 minutes",
     degreeImage: "",
+    insurance:"No",
     //addphysioworking:"",
   });
   //
@@ -48,13 +50,35 @@ const EditDetail = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const [open, setOpen] = useState(false);
-
+  const Breadcrumbs = ({ customPath }: { customPath?: string[] }) => {
+    const location = useLocation();
+    const paths = customPath || location.pathname.split("/").filter((path) => path);
+  
+    return (
+      <div className="flex items-center space-x-2 text-gray-500 text-sm mb-4">
+        <Link to="/" className="text-gray-700 hover:underline text-2xl">Registered Physio's</Link>
+        {paths.map((path, index) => (
+          <div key={index} className="flex items-center space-x-2">
+            <ChevronRight className="w-4 h-4 text-gray-400" />
+            <Link to={`/${paths.slice(0, index + 1).join("/")}`} className="hover:underline capitalize">
+              {path.replace("-", "")}
+            </Link>
+          </div>
+        ))}
+      </div>
+    );
+  };
   return (
     <div className="bg-gray-100 min-h-screen p-6">
+            <div className="flex justify-between items-center mb-4">
+        {/* Breadcrumbs Section */}
+  
+    <Breadcrumbs />
       <div className="flex justify-end mb-4">
         <Button className="bg-[#039342] text-white mt-0 rounded-lg">
           Save Changes
         </Button>
+        </div>
       </div>
       <div>
         <Card className="mb-6">
@@ -186,10 +210,22 @@ const EditDetail = () => {
                 <Input type="file" name="degreeImage" onChange={handleChange} />
               </div>
               <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+                <h3 className="font-bold mb-2">Achievement Images:</h3>
+                <Input type="file" name="achievementImage"  />
+              </div>
+              <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
                 <h3 className="font-bold mb-2">Specialization</h3>
                 <Input
                   name="specialization"
                   value={formData.specialization}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
+                <h3 className="font-bold mb-2">Like to treat insurance patient?</h3>
+                <Input
+                  name="insurance"
+                  value={formData.insurance}
                   onChange={handleChange}
                 />
               </div>
@@ -222,14 +258,6 @@ const EditDetail = () => {
               </div>
               <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
                 <h3 className="font-semibold mb-2">IAP certificate</h3>
-              </div>
-              <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
-                <h3 className="font-bold mb-2">IAP Number</h3>
-                <Input
-                  name="IAPNumber"
-                  value={formData.IAPnumber}
-                  onChange={handleChange}
-                />
               </div>
               <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
                 <h3 className="font-bold mb-2">IAP Registered</h3>
@@ -386,7 +414,17 @@ const EditDetail = () => {
                   />
                 </div>
                 <div className="border p-4 mt-4 rounded-lg shadow-sm bg-gray-100 flex-1">
-                  <h3 className="font-semibold mb-2">Consultation Fees</h3>
+                  <h3 className="font-semibold mb-2">Consultation Duration</h3>
+                  <Input
+                    name="ConsultationDuration"
+                    value={formData.ConsultationDuration}
+                    onChange={handleChange}
+                  />
+                </div>
+                </div>
+                <div className="flex space-x-4 mt-4">
+                <div className="border p-4 mt-4 rounded-lg shadow-sm bg-gray-100 flex-1">
+                  <h3 className="font-semibold mb-2">Consultation Fees For 5 km</h3>
                   <Input
                     name="ConsultationFees"
                     value={formData.ConsultationFees}
@@ -394,10 +432,10 @@ const EditDetail = () => {
                   />
                 </div>
                 <div className="border p-4 mt-4 rounded-lg shadow-sm bg-gray-100 flex-1">
-                  <h3 className="font-semibold mb-2">Consultation Duration</h3>
+                  <h3 className="font-semibold mb-2">Consultation Fees For 10 km</h3>
                   <Input
-                    name="ConsultationDuration"
-                    value={formData.ConsultationDuration}
+                    name="ConsultationFees"
+                    value={formData.ConsultationFees}
                     onChange={handleChange}
                   />
                 </div>

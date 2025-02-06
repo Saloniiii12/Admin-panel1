@@ -804,19 +804,25 @@ const Registeredphysios: React.FC = () => {
                   </Button>
                 </DialogTrigger>
 
-              <DialogContent className="absolute right-96 top-3/4 -translate-y-52 ml-96 w-80 p-6 shadow-lg bg-white border border-gray-300 rounded-lg ">
+              <DialogContent className="absolute right-96 top-3/4 -translate-y-52 ml-96 w-80 p-0 shadow-lg bg-white border border-gray-300 rounded-lg ">
 
-                  <DialogHeader>
-                    <DialogTitle>Block Physio</DialogTitle>
-                  </DialogHeader>
+              <div className="bg-[#039342] text-white p-5 rounded-t-lg">
+      <DialogHeader>
+        <DialogTitle>Block Physio</DialogTitle>
+      </DialogHeader>
+    </div>
+    <div className="px-4 mt-0 mb-4">
+                  <h2>Name</h2>
                   <Input
                     placeholder="Enter name if available"
                     className="mb-2"
                   />
+                   <h2>Number</h2>
                   <Input
                     placeholder="Enter number to block physio"
                     className="mb-2"
                   />
+                   <h2>Reason</h2>
                   <Input
                     placeholder="Enter reason to block physio"
                     className="mb-4"
@@ -824,7 +830,9 @@ const Registeredphysios: React.FC = () => {
                   <Button className="bg-[#039342] text-white w-full hover:bg-[#039342]">
                     Save & Block Physio
                   </Button>
+                  </div>
                 </DialogContent>
+               
               </Dialog>
             </div>
           </div>
