@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/table";
 import { Table, TableHeader } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { Info, MoreVertical,Eye,Lock} from "lucide-react";
+import { Info, MoreVertical,Eye,Lock, Search} from "lucide-react";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from "@/components/ui/dropdown-menu";
@@ -82,7 +82,14 @@ const Appointment = () => {
   return (
     <div className="p-6 space-y-6">
       <div className="flex justify-between items-center">
-        <Input placeholder="Search with patient name..." className="w-1/3" />
+      <div className="relative">
+      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
+      <Input
+        placeholder="Search with patient name..."
+        className="pl-10 w-80"
+      />
+   
+        </div>
         <div className="flex space-x-4">
           <Select>
             <SelectTrigger className="w-32">

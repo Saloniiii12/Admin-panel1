@@ -2,7 +2,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar } from "@/components/ui/avatar";
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
-
+const tags = [
+  "Passionate",
+  "Hard Working",
+  "Dedicated",
+  "Dedicated",
+  "Dedicated",
+  "Dedicated",
+  "Dedicated",
+  "Dedicated"
+];
 const Basicdetail = () => {
   const [openCardId, setOpenCardId] = useState<number | null>(null);
   const [degreeImages, setDegreeImages] = useState<File[]>([]);
@@ -16,6 +25,7 @@ const Basicdetail = () => {
       setDegreeImages(Array.from(e.target.files)); // Update the degreeImages state with selected files
     }
   };
+  
 
   const renderDegreeImages = () => {
     return degreeImages.map((image, index) => (
@@ -72,6 +82,13 @@ const Basicdetail = () => {
               </div>
             </div>
           </div>
+          <div className="flex gap-3 overflow-x-auto p-4">
+      {tags.map((tag, index) => (
+        <span key={index} className="px-3 py-1 border border-gray-300 rounded-md whitespace-nowrap">
+          {tag}
+        </span>
+      ))}
+    </div>
           <div className="mt-4">
             <div className="border p-4 rounded-lg shadow-sm bg-gray-100">
               <h3 className="font-semibold mb-2">About Physio</h3>
