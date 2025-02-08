@@ -209,7 +209,7 @@ const unapprovedphysios = [
     //status: "Approved",
   },
 ];
-const Registeredphysios: React.FC = () => {
+const Physios: React.FC = () => {
   const navigate = useNavigate();
 
   const handleViewClick = () => {
@@ -1074,4 +1074,4 @@ const Registeredphysios: React.FC = () => {
     </div>
   );
 };
-export default Registeredphysios;
+export default Physios;

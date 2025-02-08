@@ -27,7 +27,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const items = [
-	{ icon: Layout, label: "Registered Physio", url: "Registeredphysios" },
+	{ icon: Layout, label: "Dashboard", url: "Dashboard" },
 	{
 		icon: BriefcaseMedical,
 		label: "Physio's",
