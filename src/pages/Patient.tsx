@@ -23,6 +23,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import { useNavigate } from "react-router-dom";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { useState } from "react";
 
 const patients = [
   {
@@ -200,7 +209,7 @@ const Patient: React.FC = () => {
     const physioId = 3; // Replace this with dynamic ID logic
     navigate(`/view/${physioId}`);
   };
-  
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
@@ -508,19 +517,64 @@ const Patient: React.FC = () => {
                       <td>{patient.time}</td>
                       <td>
                         {patient.necessity}
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button
-                              variant="ghost"
-                              size="icon"
-                              className="ml-0 text-black"
-                            >
-                              <Info className="h-4 w-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                        </DropdownMenu>
+                        
+                        <Dialog>
+                        <DialogTrigger asChild>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="ml-0 text-black"
+          >
+            <Info className="h-4 w-4" />
+          </Button>
+        </DialogTrigger>
+      <DialogContent className="max-w-md">
+        <DialogHeader className="flex justify-between">
+          <DialogTitle>Appointment Details</DialogTitle>
+         
+        </DialogHeader>
+        <div className="grid gap-2 text-sm">
+          <div className="flex justify-between">
+            <span className="text-gray-500">Appointment Date</span>
+            <span className="font-medium">{}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-500">Appointment Time</span>
+            <span className="font-medium">{}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-500">Service Type</span>
+            <span className="font-medium">{}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-500">Booking Date</span>
+            <span className="font-medium">{}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-500">Total Amount</span>
+            <span className="font-medium">₹{}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-500">Payable Amount</span>
+            <span className="font-medium">₹{}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-500">Payment Method</span>
+            <span className="font-medium">{}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-500">Payment Status</span>
+            <span className="font-medium text-yellow-600">{}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-500">Payment Date</span>
+            <span className="font-medium">{"No data available"}</span>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
                       </td>
-
+                     
                       <td className="py-4">
                         <span
                           className={`inline-flex patients-center px-3 py-1 rounded-full text-sm font-medium ${
@@ -544,33 +598,49 @@ const Patient: React.FC = () => {
                         </span>
                       </td>
                       <td>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger>
-                            <MoreVertical className="cursor-pointer" />
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent className="w-56 bg-black text-white">
-                            <DropdownMenuItem>
-                              <Eye />
-                              View Appointment Details
-                            </DropdownMenuItem>
-                            <hr />
-                            <DropdownMenuItem>
-                              <img src={Vector} className="w-4 h-4" />
-                              View Patient Profile
-                            </DropdownMenuItem>
-                            <hr />
-                            <DropdownMenuItem>
-                              <img src={Invoice} className="w-4 h-4" />
-                              Bill Summary(Physio End)
-                            </DropdownMenuItem>
-                            <hr />
-                            <DropdownMenuItem>
-                              <Lock />
-                              Block Patient
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </td>
+      <DropdownMenu>
+        <DropdownMenuTrigger>
+          <MoreVertical className="cursor-pointer" />
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56 bg-black text-white">
+        <DropdownMenuItem onClick={handleViewClick}>
+            <Eye />
+            View Appointment Details
+          </DropdownMenuItem>
+          <hr />
+          <DropdownMenuItem>
+            <img src={Vector} className="w-4 h-4" />
+            View Patient Profile
+          </DropdownMenuItem>
+          <hr />
+          {/* Open Dialog on Click */}
+          <DropdownMenuItem onClick={() => setIsDialogOpen(true)}>
+            <img src={Invoice} className="w-4 h-4" />
+            Bill Summary (Physio End)
+          </DropdownMenuItem>
+          <hr />
+          <DropdownMenuItem>
+            <Lock />
+            Block Patient
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      {/* Dialog Component */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+     
+        <DialogContent className="max-w-lg bg-white text-black">
+          <DialogHeader>
+            <DialogTitle>Bill Summary</DialogTitle>
+            <DialogDescription>
+              Here are the details of the bill for this patient.
+            </DialogDescription>
+          </DialogHeader>
+          {/* Add bill details here */}
+        </DialogContent>
+      </Dialog>
+    </td>
+                
                     </tr>
                   ))}
                 </tbody>
@@ -888,7 +958,6 @@ const Patient: React.FC = () => {
                   <DropdownMenuItem>Clinic</DropdownMenuItem>
                 </DropdownMenuContent> */}
               </DropdownMenu>
-              
             </div>
           </div>
 

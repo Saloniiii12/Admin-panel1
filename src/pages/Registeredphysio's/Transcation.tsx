@@ -236,6 +236,29 @@ const Transcation = () => {
           </div>
         </CardContent>
       </Card>
+       {/* Pagination Section */}
+       <div className="flex justify-between items-center mt-4">
+          <Button className="bg-white px-4 py-2 text-black hover:bg-white hover:text-black rounded">
+            Previous
+          </Button>
+          <div>
+            {[...Array(10)].map((_, index) => (
+              <Button
+                key={index}
+                className={`px-3 py-1 mx-1 rounded ${
+                  index === 0
+                    ? "bg-[#F9F5FF] text-[#7F56D9]"
+                    : "bg-gray-200 hover:bg-[#F9F5FF] hover:text-[#7F56D9]"
+                }`}
+              >
+                {index + 1}
+              </Button>
+            ))}
+          </div>
+          <Button className="bg-white text-black hover:bg-white hover:text-black px-4 py-2 rounded">
+            Next
+          </Button>
+        </div>
     </div>
   );
 };

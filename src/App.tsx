@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { createBrowserRouter, Navigate, Outlet, RouterProvider, useNavigate } from "react-router-dom";
 import MainLayout from "./components/MainLayout";
-
 import { Toaster } from "react-hot-toast";
 import Login from "@/pages/auth/Login";
 import ResetPassword from "@/pages/auth/ResetPassword";
@@ -10,7 +9,7 @@ import EditDetail from "./pages/EditDetail";
 import Patient from "@/pages/Patient";
 import ViewDetail from "./pages/ViewDetail";
 import Physios from "./pages/Physios";
-
+import Addphysio from "./pages/Addphysio";
 const RedirectToPreviousPage = () => {
   const navigate = useNavigate();
 
@@ -35,6 +34,7 @@ const router = createBrowserRouter([
 				path: "login",
 				element: <Login />,
 			},
+			
 			{
 				path: "forget-password",
 				element: <ForgetPassword />,
@@ -47,13 +47,16 @@ const router = createBrowserRouter([
 	},
   {
     path: "/",
-    element: <MainLayout />, // Main Layout with Outlet for child routes
+    element: <MainLayout />, 
     children: [
       {
-        path: "/physios", // RegisteredPhysios route
+        path: "/physios", 
         element: <Physios />,
       },
-      
+      {
+				path: "Addphysio",
+				element: <Addphysio />,
+			},
       {
         path: "edit/3", // Route for fixed ID 3
         element: <EditDetail />,
@@ -63,9 +66,10 @@ const router = createBrowserRouter([
         element: <ViewDetail />,
       },
       {
-        path: "/redirect", // Example of a redirect route
+        path: "/redirect",
         element: <RedirectToPreviousPage />,
       },
+     
       {
         path:"/patient",
         element:<Patient />,

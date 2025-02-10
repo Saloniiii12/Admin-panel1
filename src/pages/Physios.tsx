@@ -216,6 +216,10 @@ const Physios: React.FC = () => {
     const physioId = 3; // Replace this with dynamic ID logic
     navigate(`/view/${physioId}`);
   };
+  const handleClick = () => {
+  // Replace this with dynamic ID logic
+    navigate(`/Addphysio`);
+  };
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -239,7 +243,7 @@ const Physios: React.FC = () => {
                   <DropdownMenuItem>Year</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-      <Button variant="outline">Add Physio's +</Button>
+      <Button variant="outline" onClick={handleClick}>Add Physio's +</Button>
       <Button
         variant="outline"
         className="bg-[#039342] text-white hover:bg-[#039342] hover:text-white"
@@ -300,12 +304,7 @@ const Physios: React.FC = () => {
           >
             Block Physio's
           </TabsTrigger>
-          <TabsTrigger
-            className="border-b-2 rounded-none shadow-none border-gray-200  data-[state=active]:text-green-500 data-[state=active]:border-green-500 data-[state=active]:bg-gray-50"
-            value="edit"
-          >
-            Physio Edit Request
-          </TabsTrigger>
+         
         </TabsList>
 
         <TabsContent value="all">
@@ -921,132 +920,7 @@ const Physios: React.FC = () => {
             </CardContent>
           </Card>
         </TabsContent>
-        <TabsContent value="edit">
-          {/* Search & Filters */}
-          <div className="flex justify-between my-4">
-          <div className="relative w-1/3">
-      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
-      <Input
-        placeholder="Search for Physio’s doctor name..."
-        className="pl-10"
-      />
-    </div>
-            <div className="flex gap-2">
-             {/* Plan Status Dropdown */}
-             <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline">
-                    Plan Status
-                    <ChevronDown className="ml-2" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem>Active</DropdownMenuItem>
-                  <DropdownMenuItem>Expired</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline">
-                    Date Filter
-                    <ChevronDown className="ml-2" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem>Today</DropdownMenuItem>
-                  <DropdownMenuItem>Yesterday</DropdownMenuItem>
-                  <DropdownMenuItem>Custom</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              {/* Physio’s Plan Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline">
-                    Physio’s Plan
-                    <ChevronDown className="ml-2" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem>Basic</DropdownMenuItem>
-                  <DropdownMenuItem>Premium</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-{/* 
-              Service Type Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline">
-                    Service Type
-                    <ChevronDown className="ml-2" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem>Home</DropdownMenuItem>
-                  <DropdownMenuItem>Clinic</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              {/* Approved Dropdown */}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="outline">
-                    Approved
-                    <ChevronDown className="ml-2" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem>Approved</DropdownMenuItem>
-                  <DropdownMenuItem>Unapproved</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-              
-            </div>
-          </div>
-          {/* Table */}
-          <Card>
-            <CardContent>
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="border-b text-left text-gray-600">
-                    <th className="p-2">Physio Details</th>
-                    <th>Service Type</th>
-                    <th>Contact Number</th>
-                   
-                  </tr>
-                </thead>
-                <tbody>
-                  {physios.map((physio, index) => (
-                    <tr key={index} className="border-b">
-                      <td className="p-2">
-                        <p className="font-medium">{physio.name}</p>
-                        <p className="text-sm text-gray-500">{physio.email}</p>
-                      </td>
-                      <td>{physio.type}</td>
-                      <td>{physio.phone}</td>
-                      
-                      <td>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger>
-                            <MoreVertical className="cursor-pointer" />
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent>
-                            <DropdownMenuItem onClick={handleViewClick}>
-                              View Profile
-                            </DropdownMenuItem>
-                            <DropdownMenuItem>Edit</DropdownMenuItem>
-                            <DropdownMenuItem>Block</DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </CardContent>
-          </Card>
-        </TabsContent>
+        
       </Tabs>
       {/* Pagination */}
       <div className="flex justify-between items-center mt-6">
