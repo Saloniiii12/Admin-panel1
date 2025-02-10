@@ -204,7 +204,14 @@ const treatment = [
 
 const Patient: React.FC = () => {
   const navigate = useNavigate();
-
+  const [openDialog, setOpenDialog] = useState(false);
+  const [activeTab, setActiveTab] = useState("basic");
+  const handleViewDetails = () => {
+    setOpenDialog(true); // Open the dialog when "View Details" is clicked
+  };
+  const handleView = () => {
+    setOpenDialog(true);
+  };
   const handleViewClick = () => {
     const physioId = 3; // Replace this with dynamic ID logic
     navigate(`/view/${physioId}`);
@@ -228,7 +235,6 @@ const Patient: React.FC = () => {
           </Button>
         </div>
       </div>
-
       <div className="grid grid-cols-4 gap-0 ">
         <Card className="p-4 text-center rounded-none">
           <p>Total Patient's</p>
@@ -248,7 +254,6 @@ const Patient: React.FC = () => {
         </Card>
       </div>
       {/* Tabs */}
-
       <Tabs defaultValue="all">
         <TabsList className="flex p-2 mt-5 bg-gray-50 justify-start ">
           <TabsTrigger
@@ -282,7 +287,6 @@ const Patient: React.FC = () => {
             Coins Request
           </TabsTrigger>
         </TabsList>
-
         <TabsContent value="all">
           {/* Search & Filters */}
           <div className="flex justify-between my-4">
@@ -316,11 +320,6 @@ const Patient: React.FC = () => {
                     <ChevronDown className="ml-2" />
                   </Button>
                 </DropdownMenuTrigger>
-                {/* <DropdownMenuContent>
-                  <DropdownMenuItem>Today</DropdownMenuItem>
-                  <DropdownMenuItem>Yesterday</DropdownMenuItem>
-                  <DropdownMenuItem>Custom</DropdownMenuItem>
-                </DropdownMenuContent> */}
               </DropdownMenu>
               {/* Physio’s Plan Dropdown */}
               <DropdownMenu>
@@ -517,64 +516,85 @@ const Patient: React.FC = () => {
                       <td>{patient.time}</td>
                       <td>
                         {patient.necessity}
-                        
+
                         <Dialog>
-                        <DialogTrigger asChild>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="ml-0 text-black"
-          >
-            <Info className="h-4 w-4" />
-          </Button>
-        </DialogTrigger>
-      <DialogContent className="max-w-md">
-        <DialogHeader className="flex justify-between">
-          <DialogTitle>Appointment Details</DialogTitle>
-         
-        </DialogHeader>
-        <div className="grid gap-2 text-sm">
-          <div className="flex justify-between">
-            <span className="text-gray-500">Appointment Date</span>
-            <span className="font-medium">{}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-500">Appointment Time</span>
-            <span className="font-medium">{}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-500">Service Type</span>
-            <span className="font-medium">{}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-500">Booking Date</span>
-            <span className="font-medium">{}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-500">Total Amount</span>
-            <span className="font-medium">₹{}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-500">Payable Amount</span>
-            <span className="font-medium">₹{}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-500">Payment Method</span>
-            <span className="font-medium">{}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-500">Payment Status</span>
-            <span className="font-medium text-yellow-600">{}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-gray-500">Payment Date</span>
-            <span className="font-medium">{"No data available"}</span>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
+                          <DialogTrigger asChild>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="ml-0 text-black"
+                            >
+                              <Info className="h-4 w-4" />
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="max-w-md">
+                            <DialogHeader className="flex justify-between">
+                              <DialogTitle>Appointment Details</DialogTitle>
+                            </DialogHeader>
+                            <div className="grid gap-2 text-sm">
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Appointment Date
+                                </span>
+                                <span className="font-medium">{}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Appointment Time
+                                </span>
+                                <span className="font-medium">{}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Service Type
+                                </span>
+                                <span className="font-medium">{}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Booking Date
+                                </span>
+                                <span className="font-medium">{}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Total Amount
+                                </span>
+                                <span className="font-medium">₹{}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Payable Amount
+                                </span>
+                                <span className="font-medium">₹{}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Payment Method
+                                </span>
+                                <span className="font-medium">{}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Payment Status
+                                </span>
+                                <span className="font-medium text-yellow-600">
+                                  {}
+                                </span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Payment Date
+                                </span>
+                                <span className="font-medium">
+                                  {"No data available"}
+                                </span>
+                              </div>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
                       </td>
-                     
+
                       <td className="py-4">
                         <span
                           className={`inline-flex patients-center px-3 py-1 rounded-full text-sm font-medium ${
@@ -598,49 +618,273 @@ const Patient: React.FC = () => {
                         </span>
                       </td>
                       <td>
-      <DropdownMenu>
-        <DropdownMenuTrigger>
-          <MoreVertical className="cursor-pointer" />
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56 bg-black text-white">
-        <DropdownMenuItem onClick={handleViewClick}>
-            <Eye />
-            View Appointment Details
-          </DropdownMenuItem>
-          <hr />
-          <DropdownMenuItem>
-            <img src={Vector} className="w-4 h-4" />
-            View Patient Profile
-          </DropdownMenuItem>
-          <hr />
-          {/* Open Dialog on Click */}
-          <DropdownMenuItem onClick={() => setIsDialogOpen(true)}>
-            <img src={Invoice} className="w-4 h-4" />
-            Bill Summary (Physio End)
-          </DropdownMenuItem>
-          <hr />
-          <DropdownMenuItem>
-            <Lock />
-            Block Patient
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+                        <DropdownMenu>
+                          <DropdownMenuTrigger>
+                            <MoreVertical className="cursor-pointer" />
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent className="w-56 bg-black text-white">
+                            <DropdownMenuItem onClick={handleViewDetails}>
+                              <Eye />
+                              View Appointment Details
+                            </DropdownMenuItem>
+                            <hr />
+                            <DropdownMenuItem onClick={handleViewClick}>
+                              <img src={Vector} className="w-4 h-4" />
+                              View Patient Profile
+                            </DropdownMenuItem>
+                            <hr />
+                            {/* Open Dialog on Click */}
 
-      {/* Dialog Component */}
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-     
-        <DialogContent className="max-w-lg bg-white text-black">
-          <DialogHeader>
-            <DialogTitle>Bill Summary</DialogTitle>
-            <DialogDescription>
-              Here are the details of the bill for this patient.
-            </DialogDescription>
-          </DialogHeader>
-          {/* Add bill details here */}
-        </DialogContent>
-      </Dialog>
-    </td>
-                
+                            <DropdownMenuItem
+                              onClick={() => setIsDialogOpen(true)}
+                            >
+                              <img src={Invoice} className="w-4 h-4" />
+                              Bill Summary (Physio End)
+                            </DropdownMenuItem>
+                            <hr />
+                            <DropdownMenuItem>
+                              <Lock />
+                              Block Patient
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                          <Dialog
+                            open={openDialog}
+                            onOpenChange={setOpenDialog}
+                          >
+                            <DialogTrigger asChild>
+                              {/* The trigger is managed by the "View Details" action */}
+                              <Button style={{ display: "none" }} />
+                            </DialogTrigger>
+                            <DialogContent className="max-w-xl mx-auto p-4 bg-white shadow-none rounded-lg">
+                              <div className="flex border-b">
+                                <button
+                                  onClick={() => setActiveTab("basic")}
+                                  className={`py-2 px-4 text-sm font-semibold focus:outline-none ${
+                                    activeTab === "basic"
+                                      ? "border-b-2 border-green-500 text-green-500"
+                                      : "text-gray-500"
+                                  }`}
+                                >
+                                  Basic Details
+                                </button>
+                                <button
+                                  onClick={() => setActiveTab("appointment")}
+                                  className={`py-2 px-4 text-sm font-semibold focus:outline-none ${
+                                    activeTab === "appointment"
+                                      ? "border-b-2 border-green-500 text-green-500"
+                                      : "text-gray-500"
+                                  }`}
+                                >
+                                  Appointment Details
+                                </button>
+                                <button
+                                  onClick={() => setActiveTab("payment")}
+                                  className={`py-2 px-4 text-sm font-semibold focus:outline-none ${
+                                    activeTab === "treatment"
+                                      ? "border-b-2 border-green-500 text-green-500"
+                                      : "text-gray-500"
+                                  }`}
+                                >
+                                  Payment Details
+                                </button>
+                              </div>
+                              <div className="p-2">
+                                {activeTab === "basic" && (
+                                  <div>
+                                    <label className="block text-gray-700">
+                                      Patient Name
+                                    </label>
+                                    <input
+                                      type="text"
+                                      value="Taimur Khan"
+                                      readOnly
+                                      className="w-full p-2 border rounded"
+                                    />
+
+                                    <label className="block mt-4 text-gray-700">
+                                      Patient Age
+                                    </label>
+                                    <input
+                                      type="text"
+                                      value="12"
+                                      readOnly
+                                      className="w-full p-2 border rounded"
+                                    />
+
+                                    <label className="block mt-4 text-gray-700">
+                                      Gender
+                                    </label>
+                                    <input
+                                      type="text"
+                                      value="Male"
+                                      readOnly
+                                      className="w-full p-2 border rounded"
+                                    />
+                                  </div>
+                                )}
+                                {activeTab === "appointment" && (
+                                  <div className="grid grid-cols-2 gap-4 mt-0 ">
+                                    <div>
+                                      <label className="text-gray-600">
+                                        Appointment Date
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value="30 Jan 2025"
+                                        className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                        disabled
+                                      />
+                                    </div>
+                                    <div>
+                                      <label className="text-gray-600">
+                                        Appointment Time
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value="4:00 PM"
+                                        className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                        disabled
+                                      />
+                                    </div>
+                                    <div>
+                                      <label className="text-gray-600">
+                                        Payment Method
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value="Cash"
+                                        className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                        disabled
+                                      />
+                                    </div>
+                                    <div>
+                                      <label className="text-gray-600">
+                                        Booking Date
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value="20 Jan 2025"
+                                        className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                        disabled
+                                      />
+                                    </div>
+                                    <div>
+                                      <label className="text-gray-600">
+                                        Consultation Charges
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value="₹ 950"
+                                        className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                        disabled
+                                      />
+                                    </div>
+                                    <div>
+                                      <label className="text-gray-600">
+                                        Payment Date
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value="20 Jan 2025"
+                                        className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                        disabled
+                                      />
+                                    </div>
+                                    <div>
+                                      <label className="text-gray-600">
+                                        Rescheduled Appointment Date
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value="30 Jan 2025"
+                                        className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                        disabled
+                                      />
+                                    </div>
+                                    <div>
+                                      <label className="text-gray-600">
+                                        Rescheduled Appointment Time
+                                      </label>
+                                      <input
+                                        type="text"
+                                        value="4:00 PM"
+                                        className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                        disabled
+                                      />
+                                    </div>
+                                    <div className="col-span-2">
+                                      <label className="text-gray-600">
+                                        Patient Problem
+                                      </label>
+                                      <textarea
+                                        className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                        disabled
+                                      ></textarea>
+                                    </div>
+                                    <div className="col-span-2">
+                                      <label className="text-gray-600">
+                                        Physio Prescription
+                                      </label>
+                                      <textarea
+                                        className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                        disabled
+                                      ></textarea>
+                                    </div>
+                                  </div>
+                                )}
+
+                                {activeTab === "payment" && (
+                                  <div className="mt-0 space-y-2 text-sm text-gray-700">
+                                    <p className=" flex justify-between ">
+                                      <span className="font-semibold">
+                                        Consultation Charges:
+                                      </span>{" "}
+                                      {"₹960"}
+                                    </p>
+
+                                    <p className=" flex justify-between text-green-500">
+                                      <span className="font-semibold ">
+                                        Physioplus Coin:
+                                      </span>
+                                      <span>{"-₹0"}</span>
+                                    </p>
+                                    <p className=" flex justify-between text-green-500">
+                                      <span className="font-semibold ">
+                                        Voucher Code:
+                                      </span>{" "}
+                                      <span>{"-₹0"}</span>
+                                    </p>
+                                    <hr />
+                                    <p className=" flex justify-between">
+                                      <span className="font-semibold ">
+                                        Total Bill
+                                      </span>{" "}
+                                      <span>{"₹960"}</span>
+                                    </p>
+                                  </div>
+                                )}
+                              </div>
+                            </DialogContent>
+                          </Dialog>
+                        </DropdownMenu>
+
+                        {/* Dialog Component */}
+                        <Dialog
+                          open={isDialogOpen}
+                          onOpenChange={setIsDialogOpen}
+                        >
+                          <DialogContent className="max-w-lg bg-white text-black">
+                            <DialogHeader>
+                              <DialogTitle>Bill Summary</DialogTitle>
+                              <DialogDescription>
+                                Here are the details of the bill for this
+                                patient.
+                              </DialogDescription>
+                            </DialogHeader>
+                            {/* Add bill details here */}
+                          </DialogContent>
+                        </Dialog>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -726,8 +970,9 @@ const Patient: React.FC = () => {
                       <td>{patient.time}</td>
                       <td>
                         {patient.necessity}
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
+
+                        <Dialog>
+                          <DialogTrigger asChild>
                             <Button
                               variant="ghost"
                               size="icon"
@@ -735,8 +980,79 @@ const Patient: React.FC = () => {
                             >
                               <Info className="h-4 w-4" />
                             </Button>
-                          </DropdownMenuTrigger>
-                        </DropdownMenu>
+                          </DialogTrigger>
+                          <DialogContent className="max-w-md">
+                            <DialogHeader className="flex justify-between">
+                              <DialogTitle>Treatment Details</DialogTitle>
+                            </DialogHeader>
+                            <div className="grid gap-2 text-sm">
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Treatment Duration
+                                </span>
+                                <span className="font-medium">{"5 Days"}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Treatment Start Date
+                                </span>
+                                <span className="font-medium">
+                                  {"20 Jan 2025"}
+                                </span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Treatment End Date
+                                </span>
+                                <span className="font-medium">
+                                  {"25 Jan 2025"}
+                                </span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Service Type
+                                </span>
+                                <span className="font-medium">
+                                  {"Home Care"}
+                                </span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Treatment Time
+                                </span>
+                                <span className="font-medium">{"4:30 PM"}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Treatment Amount
+                                </span>
+                                <span className="font-medium">₹{2500}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Amount Paid Yet
+                                </span>
+                                <span className="font-medium">₹{0}</span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Payment Status
+                                </span>
+                                <span className="font-medium text-yellow-600">
+                                  {"Not Paid"}
+                                </span>
+                              </div>
+                              <div className="flex justify-between">
+                                <span className="text-gray-500">
+                                  Payment Date
+                                </span>
+                                <span className="font-medium">
+                                  {"No data available"}
+                                </span>
+                              </div>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
                       </td>
 
                       <td className="py-4">
@@ -767,19 +1083,22 @@ const Patient: React.FC = () => {
                             <MoreVertical className="cursor-pointer" />
                           </DropdownMenuTrigger>
                           <DropdownMenuContent className="w-56 bg-black text-white">
-                            <DropdownMenuItem>
+                            <DropdownMenuItem onClick={handleView}>
                               <Eye />
                               View Appointment Details
                             </DropdownMenuItem>
                             <hr />
-                            <DropdownMenuItem>
+                            <DropdownMenuItem onClick={handleViewClick}>
                               <img src={Vector} className="w-4 h-4" />
                               View Patient Profile
                             </DropdownMenuItem>
                             <hr />
-                            <DropdownMenuItem>
+                            {/* Open Dialog on Click */}
+                            <DropdownMenuItem
+                              onClick={() => setIsDialogOpen(true)}
+                            >
                               <img src={Invoice} className="w-4 h-4" />
-                              Bill Summary(Physio End)
+                              Bill Summary (Physio End)
                             </DropdownMenuItem>
                             <hr />
                             <DropdownMenuItem>
@@ -788,6 +1107,241 @@ const Patient: React.FC = () => {
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
+                        <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+                          <DialogTrigger asChild>
+                            {/* The trigger is managed by the "View Details" action */}
+                            <Button style={{ display: "none" }} />
+                          </DialogTrigger>
+                          <DialogContent className="max-w-xl mx-auto p-4 bg-white shadow-none rounded-lg">
+                            <div className="flex border-b">
+                              <button
+                                onClick={() => setActiveTab("basic")}
+                                className={`py-2 px-4 text-sm font-semibold focus:outline-none ${
+                                  activeTab === "basic"
+                                    ? "border-b-2 border-green-500 text-green-500"
+                                    : "text-gray-500"
+                                }`}
+                              >
+                                Basic Details
+                              </button>
+                              <button
+                                onClick={() => setActiveTab("appointment")}
+                                className={`py-2 px-4 text-sm font-semibold focus:outline-none ${
+                                  activeTab === "appointment"
+                                    ? "border-b-2 border-green-500 text-green-500"
+                                    : "text-gray-500"
+                                }`}
+                              >
+                                Appointment Details
+                              </button>
+                              <button
+                                onClick={() => setActiveTab("payment")}
+                                className={`py-2 px-4 text-sm font-semibold focus:outline-none ${
+                                  activeTab === "treatment"
+                                    ? "border-b-2 border-green-500 text-green-500"
+                                    : "text-gray-500"
+                                }`}
+                              >
+                                Payment Details
+                              </button>
+                            </div>
+                            <div className="p-2">
+                              {activeTab === "basic" && (
+                                <div>
+                                  <label className="block text-gray-700">
+                                    Patient Name
+                                  </label>
+                                  <input
+                                    type="text"
+                                    value="Taimur Khan"
+                                    readOnly
+                                    className="w-full p-2 border rounded"
+                                  />
+
+                                  <label className="block mt-4 text-gray-700">
+                                    Patient Age
+                                  </label>
+                                  <input
+                                    type="text"
+                                    value="12"
+                                    readOnly
+                                    className="w-full p-2 border rounded"
+                                  />
+
+                                  <label className="block mt-4 text-gray-700">
+                                    Gender
+                                  </label>
+                                  <input
+                                    type="text"
+                                    value="Male"
+                                    readOnly
+                                    className="w-full p-2 border rounded"
+                                  />
+                                </div>
+                              )}
+                              {activeTab === "appointment" && (
+                                <div className="grid grid-cols-2 gap-4 mt-0 ">
+                                  <div>
+                                    <label className="text-gray-600">
+                                      Appointment Date
+                                    </label>
+                                    <input
+                                      type="text"
+                                      value="30 Jan 2025"
+                                      className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                      disabled
+                                    />
+                                  </div>
+                                  <div>
+                                    <label className="text-gray-600">
+                                      Appointment Time
+                                    </label>
+                                    <input
+                                      type="text"
+                                      value="4:00 PM"
+                                      className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                      disabled
+                                    />
+                                  </div>
+                                  <div>
+                                    <label className="text-gray-600">
+                                      Payment Method
+                                    </label>
+                                    <input
+                                      type="text"
+                                      value="Cash"
+                                      className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                      disabled
+                                    />
+                                  </div>
+                                  <div>
+                                    <label className="text-gray-600">
+                                      Booking Date
+                                    </label>
+                                    <input
+                                      type="text"
+                                      value="20 Jan 2025"
+                                      className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                      disabled
+                                    />
+                                  </div>
+                                  <div>
+                                    <label className="text-gray-600">
+                                      Consultation Charges
+                                    </label>
+                                    <input
+                                      type="text"
+                                      value="₹ 950"
+                                      className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                      disabled
+                                    />
+                                  </div>
+                                  <div>
+                                    <label className="text-gray-600">
+                                      Payment Date
+                                    </label>
+                                    <input
+                                      type="text"
+                                      value="20 Jan 2025"
+                                      className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                      disabled
+                                    />
+                                  </div>
+                                  <div>
+                                    <label className="text-gray-600">
+                                      Rescheduled Appointment Date
+                                    </label>
+                                    <input
+                                      type="text"
+                                      value="30 Jan 2025"
+                                      className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                      disabled
+                                    />
+                                  </div>
+                                  <div>
+                                    <label className="text-gray-600">
+                                      Rescheduled Appointment Time
+                                    </label>
+                                    <input
+                                      type="text"
+                                      value="4:00 PM"
+                                      className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                      disabled
+                                    />
+                                  </div>
+                                  <div className="col-span-2">
+                                    <label className="text-gray-600">
+                                      Patient Problem
+                                    </label>
+                                    <textarea
+                                      className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                      disabled
+                                    ></textarea>
+                                  </div>
+                                  <div className="col-span-2">
+                                    <label className="text-gray-600">
+                                      Physio Prescription
+                                    </label>
+                                    <textarea
+                                      className="w-full p-2 mt-1 border rounded bg-gray-100"
+                                      disabled
+                                    ></textarea>
+                                  </div>
+                                </div>
+                              )}
+
+                              {activeTab === "payment" && (
+                                <div className="mt-0 space-y-2 text-sm text-gray-700">
+                                  <p className=" flex justify-between ">
+                                    <span className="font-semibold">
+                                      Consultation Charges:
+                                    </span>{" "}
+                                    {"₹960"}
+                                  </p>
+
+                                  <p className=" flex justify-between text-green-500">
+                                    <span className="font-semibold ">
+                                      Physioplus Coin:
+                                    </span>
+                                    <span>{"-₹0"}</span>
+                                  </p>
+                                  <p className=" flex justify-between text-green-500">
+                                    <span className="font-semibold ">
+                                      Voucher Code:
+                                    </span>{" "}
+                                    <span>{"-₹0"}</span>
+                                  </p>
+                                  <hr />
+                                  <p className=" flex justify-between">
+                                    <span className="font-semibold ">
+                                      Total Bill
+                                    </span>{" "}
+                                    <span>{"₹960"}</span>
+                                  </p>
+                                </div>
+                              )}
+                            </div>
+                          </DialogContent>
+                        </Dialog>
+                        {/* Dialog Component */}
+                        <Dialog
+                          open={isDialogOpen}
+                          onOpenChange={setIsDialogOpen}
+                        >
+                          <DialogContent
+                            className="max-w-lg bg-white text-black shadow-lg border border-gray-300"
+                            style={{ backgroundColor: "white" }}
+                          >
+                            <DialogHeader>
+                              <DialogTitle>Bill Summary</DialogTitle>
+                              <DialogDescription>
+                                Here are the details of the bill for this
+                                patient.
+                              </DialogDescription>
+                            </DialogHeader>
+                            {/* Add bill details here */}
+                          </DialogContent>
+                        </Dialog>
                       </td>
                     </tr>
                   ))}
@@ -926,11 +1480,6 @@ const Patient: React.FC = () => {
                     <ChevronDown className="ml-2" />
                   </Button>
                 </DropdownMenuTrigger>
-                {/* <DropdownMenuContent>
-                  <DropdownMenuItem>Today</DropdownMenuItem>
-                  <DropdownMenuItem>Yesterday</DropdownMenuItem>
-                  <DropdownMenuItem>Custom</DropdownMenuItem>
-                </DropdownMenuContent> */}
               </DropdownMenu>
               {/* Physio’s Plan Dropdown */}
               <DropdownMenu>
@@ -940,10 +1489,6 @@ const Patient: React.FC = () => {
                     <ChevronDown className="ml-2" />
                   </Button>
                 </DropdownMenuTrigger>
-                {/* <DropdownMenuContent>
-                  <DropdownMenuItem>Basic</DropdownMenuItem>
-                  <DropdownMenuItem>Premium</DropdownMenuItem>
-                </DropdownMenuContent> */}
               </DropdownMenu>
 
               <DropdownMenu>
@@ -953,10 +1498,6 @@ const Patient: React.FC = () => {
                     <ChevronDown className="ml-2" />
                   </Button>
                 </DropdownMenuTrigger>
-                {/* <DropdownMenuContent>
-                  <DropdownMenuItem>Home</DropdownMenuItem>
-                  <DropdownMenuItem>Clinic</DropdownMenuItem>
-                </DropdownMenuContent> */}
               </DropdownMenu>
             </div>
           </div>

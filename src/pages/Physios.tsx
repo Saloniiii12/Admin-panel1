@@ -627,6 +627,19 @@ const Physios: React.FC = () => {
       />
     </div>
             <div className="flex gap-2">
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Date Filter
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Today</DropdownMenuItem>
+                  <DropdownMenuItem>Yesterday</DropdownMenuItem>
+                  <DropdownMenuItem>Custom</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline">
@@ -768,6 +781,19 @@ const Physios: React.FC = () => {
       />
     </div>
             <div className="flex gap-2">
+            <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="outline">
+                    Date Filter
+                    <ChevronDown className="ml-2" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Today</DropdownMenuItem>
+                  <DropdownMenuItem>Yesterday</DropdownMenuItem>
+                  <DropdownMenuItem>Custom</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline">
