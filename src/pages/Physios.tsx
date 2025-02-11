@@ -218,7 +218,7 @@ const Physios: React.FC = () => {
   };
   const handleClick = () => {
   // Replace this with dynamic ID logic
-    navigate(`/Addphysio`);
+    navigate(`/addphysio`);
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
 

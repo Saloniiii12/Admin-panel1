@@ -21,7 +21,9 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
+import { Calendar } from "@/components/ui/calendar";
 
+import { CalendarIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import {
   Dialog,
@@ -204,17 +206,20 @@ const treatment = [
 
 const Patient: React.FC = () => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [activeTab, setActiveTab] = useState("basic");
+  const [amount, setAmount] = useState("");
+
   const handleViewDetails = () => {
     setOpenDialog(true); // Open the dialog when "View Details" is clicked
   };
   const handleView = () => {
     setOpenDialog(true);
   };
-  const handleViewClick = () => {
-    const physioId = 3; // Replace this with dynamic ID logic
-    navigate(`/view/${physioId}`);
+  const handleClick = () => {
+    const patientId = 4; // Replace this with dynamic ID logic
+    navigate(`/overview/${patientId}`);
   };
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
@@ -396,7 +401,7 @@ const Patient: React.FC = () => {
                             <MoreVertical className="cursor-pointer" />
                           </DropdownMenuTrigger>
                           <DropdownMenuContent className="bg-black text-white">
-                            <DropdownMenuItem onClick={handleViewClick}>
+                            <DropdownMenuItem onClick={handleClick}>
                               <Eye />
                               View{" "}
                             </DropdownMenuItem>
@@ -628,7 +633,7 @@ const Patient: React.FC = () => {
                               View Appointment Details
                             </DropdownMenuItem>
                             <hr />
-                            <DropdownMenuItem onClick={handleViewClick}>
+                            <DropdownMenuItem onClick={handleClick}>
                               <img src={Vector} className="w-4 h-4" />
                               View Patient Profile
                             </DropdownMenuItem>
@@ -1088,7 +1093,7 @@ const Patient: React.FC = () => {
                               View Appointment Details
                             </DropdownMenuItem>
                             <hr />
-                            <DropdownMenuItem onClick={handleViewClick}>
+                            <DropdownMenuItem onClick={handleClick}>
                               <img src={Vector} className="w-4 h-4" />
                               View Patient Profile
                             </DropdownMenuItem>
@@ -1384,14 +1389,52 @@ const Patient: React.FC = () => {
                 </DropdownMenuTrigger>
               </DropdownMenu>
 
-              <Button variant="outline" className="bg-[#039342] text-white">
-                {" "}
-                Block Patient
-                <Lock className="ml-2" />
-              </Button>
+              <Dialog
+                open={isModalOpen}
+                onOpenChange={setIsModalOpen}
+                modal={false}
+              >
+                <DialogTrigger asChild>
+                  <Button
+                    variant="outline"
+                    className="bg-[#039342] text-white hover:bg-[#039342] hover:text-white"
+                    onClick={() => setIsModalOpen(true)}
+                  >
+                    Blocked
+                    <Lock />
+                  </Button>
+                </DialogTrigger>
+
+                <DialogContent className="absolute right-96 top-3/4 -translate-y-52 ml-96 w-80 p-0 shadow-lg bg-white border border-gray-300 rounded-lg ">
+                  <div className="bg-[#039342] text-white p-5 rounded-t-lg">
+                    <DialogHeader>
+                      <DialogTitle>Block Patient</DialogTitle>
+                    </DialogHeader>
+                  </div>
+                  <div className="px-4 mt-0 mb-4">
+                    <h2>Name</h2>
+                    <Input
+                      placeholder="Enter name if available"
+                      className="mb-2"
+                    />
+                    <h2>Number</h2>
+                    <Input
+                      placeholder="Enter number to block patient"
+                      className="mb-2"
+                    />
+                    <h2>Reason</h2>
+                    <Input
+                      placeholder="Enter reason to block patient"
+                      className="mb-4"
+                    />
+                    <Button className="bg-[#039342] text-white w-full hover:bg-[#039342]">
+                      Save & Block Patient
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
-
           {/* Table */}
 
           <Card>
@@ -1529,10 +1572,67 @@ const Patient: React.FC = () => {
                       <td>{patient.state}</td>
                       <td>{patient.city}</td>
                       <td>
-                        <Button className="bg-[#DFF1E7] hover:bg-[#DFF1E7] text-[#039342]">
-                          Approve
-                          <img src={coin} alt="" className="text-black" />
-                        </Button>
+                        <Dialog
+                          open={isModalOpen}
+                          onOpenChange={setIsModalOpen}
+                        >
+                          <DialogTrigger asChild>
+                            <Button className="bg-[#DFF1E7] hover:bg-[#DFF1E7] text-[#039342]">
+                              Approve
+                              <img src={coin} alt="" className="text-black" />
+                            </Button>
+                          </DialogTrigger>
+                          <DialogContent className="rounded-lg p-6 w-[400px]">
+                            <DialogHeader>
+                              <DialogTitle>Add Physioplus Coins</DialogTitle>
+                            </DialogHeader>
+                            <div className="space-y-4">
+                              <div>
+                                <label className="block text-sm font-medium">
+                                  Add Coins Amount
+                                </label>
+                                <Input
+                                  type="number"
+                                  placeholder="₹ Enter Coins Amount"
+                                  value={amount}
+                                  onChange={(e) => setAmount(e.target.value)}
+                                  className="mt-1"
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-sm font-medium">
+                                  Coin Expiry Date
+                                </label>
+                                <div className="relative">
+                                  <CalendarIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                                  <Input
+                                    type="text"
+                                    placeholder="Select Date"
+                                    readOnly
+                                    className="pl-10"
+                                  />
+                                </div>
+                                <Calendar
+                                  id="calendar"
+                                  mode="single"
+                                  className="mt-2 hidden"
+                                />
+                              </div>
+                              <div className="flex justify-between">
+                                <Button
+                                  variant="outline"
+                                  onClick={() => setIsModalOpen(false)}
+                                  className="w-1/3"
+                                >
+                                  Cancel
+                                </Button>
+                                <Button className="w-1/2 bg-green-600 hover:bg-green-700">
+                                  Add Physioplus Coins
+                                </Button>
+                              </div>
+                            </div>
+                          </DialogContent>
+                        </Dialog>
                       </td>
 
                       <td>
@@ -1541,7 +1641,7 @@ const Patient: React.FC = () => {
                             <MoreVertical className="cursor-pointer" />
                           </DropdownMenuTrigger>
                           <DropdownMenuContent className="bg-black text-white">
-                            <DropdownMenuItem onClick={handleViewClick}>
+                            <DropdownMenuItem onClick={handleClick}>
                               <Eye />
                               View Detail{" "}
                             </DropdownMenuItem>
@@ -1549,7 +1649,7 @@ const Patient: React.FC = () => {
                             <hr />
                             <DropdownMenuItem>
                               <Lock />
-                              Block
+                              Block Patient
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>

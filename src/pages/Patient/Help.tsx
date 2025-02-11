@@ -4,7 +4,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Dialog,DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import Export from "@/assets/Export (1).png";
-import {MoreVertical } from "lucide-react";
+import { MoreVertical } from "lucide-react";
 import funnel from "@/assets/FunnelSimple.png";
 const issues = [
   {
@@ -21,7 +21,7 @@ const issues = [
   })
 ];
 
-export default function HelpSupports() {
+export default function Help() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -30,10 +30,10 @@ export default function HelpSupports() {
         <h2 className="text-xl font-semibold">Help & Supports</h2>
         <div className="flex gap-2">
           <Button variant="outline" className="flex items-center gap-1">
-            Reopened <img src={funnel} alt="" />
+            Reopened   <img src={funnel} alt="" />
           </Button>
           <Button variant="outline" className="flex items-center gap-1">
-            Closed One, Filter <img src={funnel} alt="" />
+            Closed One, Filter   <img src={funnel} alt="" />
           </Button>
           <Button
         variant="outline"

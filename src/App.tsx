@@ -9,7 +9,9 @@ import EditDetail from "./pages/EditDetail";
 import Patient from "@/pages/Patient";
 import ViewDetail from "./pages/ViewDetail";
 import Physios from "./pages/Physios";
-import Addphysio from "./pages/Addphysio";
+import Addphysio from "./pages/AddPhysio";
+import Overview from "./pages/Overview";
+import EditPatient from "./pages/EditPatient";
 const RedirectToPreviousPage = () => {
   const navigate = useNavigate();
 
@@ -54,7 +56,7 @@ const router = createBrowserRouter([
         element: <Physios />,
       },
       {
-				path: "Addphysio",
+				path: "/addphysio",
 				element: <Addphysio />,
 			},
       {
@@ -62,7 +64,16 @@ const router = createBrowserRouter([
         element: <EditDetail />,
       },
       {
-        path: "view/3",
+        path: "editpatient/4", // Route for patient edit
+        element: <EditPatient />,
+      },
+      {
+        path: "overview/4", //route for patient view
+        element: <Overview />,
+      },
+
+      {
+        path: "view/3",//route for physio view
         element: <ViewDetail />,
       },
       {
