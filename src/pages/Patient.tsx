@@ -343,7 +343,7 @@ const Patient: React.FC = () => {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline">
-                    Patient Wise
+                    Pincode Wise
                     <ChevronDown className="ml-2" />
                   </Button>
                 </DropdownMenuTrigger>
@@ -359,6 +359,10 @@ const Patient: React.FC = () => {
                     <ChevronDown className="ml-2" />
                   </Button>
                 </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  <DropdownMenuItem>Service</DropdownMenuItem>
+                 
+                </DropdownMenuContent>
                 {/* <DropdownMenuContent>
                   <DropdownMenuItem>Approved</DropdownMenuItem>
                   <DropdownMenuItem>Unapproved</DropdownMenuItem>
@@ -517,8 +521,8 @@ const Patient: React.FC = () => {
                         <p className="font-medium">{patient.name}</p>
                       </td>
                       <td>{patient.date}</td>
-                      <td>{patient.phone}</td>
                       <td>{patient.time}</td>
+                      
                       <td>
                         {patient.necessity}
 
@@ -599,7 +603,7 @@ const Patient: React.FC = () => {
                           </DialogContent>
                         </Dialog>
                       </td>
-
+                      <td>{patient.type}</td>
                       <td className="py-4">
                         <span
                           className={`inline-flex patients-center px-3 py-1 rounded-full text-sm font-medium ${
@@ -971,8 +975,9 @@ const Patient: React.FC = () => {
                         <p className="font-medium">{patient.name}</p>
                       </td>
                       <td>{patient.date}</td>
-                      <td>{patient.phone}</td>
                       <td>{patient.time}</td>
+                      
+                      
                       <td>
                         {patient.necessity}
 
@@ -1059,7 +1064,7 @@ const Patient: React.FC = () => {
                           </DialogContent>
                         </Dialog>
                       </td>
-
+                      <td>{patient.type}</td>
                       <td className="py-4">
                         <span
                           className={`inline-flex patients-center px-3 py-1 rounded-full text-sm font-medium ${
@@ -1469,8 +1474,8 @@ const Patient: React.FC = () => {
                           <DropdownMenuTrigger>
                             <MoreVertical className="cursor-pointer" />
                           </DropdownMenuTrigger>
-                          <DropdownMenuContent className="bg-black text-white">
-                            <DropdownMenuItem>
+                          <DropdownMenuContent className="bg-black text-white" >
+                            <DropdownMenuItem onClick={handleClick}>
                               <img src={Vector} className="w-4 h-4" />
                               View Patient Profile
                             </DropdownMenuItem>

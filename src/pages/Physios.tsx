@@ -7,6 +7,7 @@ import {
   MoreVertical,
   Lock,
 Search,
+PlusCircle
 } from "lucide-react";
 import image from "@/assets/Export (1).png"
 import {
@@ -243,7 +244,7 @@ const Physios: React.FC = () => {
                   <DropdownMenuItem>Year</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-      <Button variant="outline" onClick={handleClick}>Add Physio's +</Button>
+      <Button variant="outline" onClick={handleClick}>Add Physio's <PlusCircle/></Button>
       <Button
         variant="outline"
         className="bg-[#039342] text-white hover:bg-[#039342] hover:text-white"

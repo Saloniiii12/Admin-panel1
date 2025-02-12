@@ -25,7 +25,7 @@ export default function Login() {
 			toast.success("Login successful");
 			// Simulate token storage and navigation
 			sessionStorage.setItem("token", "fake-token");
-			navigate("/Registeredphysios");
+			navigate("/Physios");
 		}
 	};
 
