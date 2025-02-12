@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Toaster } from "react-hot-toast";
 import { Lock, Crown, ChevronRight } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import Transcation from "../../components/Physios/Transcation";
@@ -82,7 +81,7 @@ const ViewDetail: React.FC = () => {
 					onValueChange={setActiveTab}
 					className="mb-4"
 				>
-					<TabsList className="w-full bg-white ">
+					<TabsList className="w-full bg-white flex justify-start">
 						<TabsTrigger
 							value="basic detail"
 							className="border-b-2 rounded-none shadow-none border-gray-200  data-[state=active]:text-green-500 data-[state=active]:border-green-500"
@@ -126,9 +125,12 @@ const ViewDetail: React.FC = () => {
 						>
 							Help & Support
 						</TabsTrigger>
-						<TabsContent value="basic detail">
+						<TabsContent
+							value="basic detail"
+							className="ml-auto"
+						>
 							{/* Basic Details Section */}
-							<div className="mt-0 mb-2 p-0  ml-60 justify-normal">
+							<div className="mt-0 mb-2 p-0 ">
 								<DropdownMenu>
 									<DropdownMenuTrigger asChild>
 										<Button
@@ -165,11 +167,6 @@ const ViewDetail: React.FC = () => {
 					</TabsContent>
 				</Tabs>
 			</div>
-			{/* Toaster Notification */}
-			<Toaster
-				position="top-right"
-				reverseOrder={false}
-			/>
 		</div>
 	);
 };

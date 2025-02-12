@@ -1,20 +1,19 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import { useEffect } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 
 const MainLayout = () => {
-	//const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		// const token = sessionStorage.getItem("token");
-		// if (!token || token === "") {
-		// 	navigate("/auth/login");
-		// }
-		// else {
-		// 	navigate("/dashboard");
-		// }
+		const token = localStorage.getItem("token");
+		if (!token || token === "") {
+			navigate("/auth/login");
+		} else {
+			navigate("/physios");
+		}
 	}, []);
 
 	return (

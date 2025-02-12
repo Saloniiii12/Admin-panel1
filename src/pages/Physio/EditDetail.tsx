@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { Calendar } from "@/components/ui/calendar";
 
-const Addphysio = () => {
+const EditDetail = () => {
 	const [date, setDate] = useState<Date>();
 
 	const [formData, setFormData] = useState({
@@ -521,4 +521,4 @@ const Addphysio = () => {
 	);
 };
 
-export default Addphysio;
+export default EditDetail;

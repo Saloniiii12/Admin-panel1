@@ -2,8 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "@/assets/image 2.png";
 
 import { Input } from "@/components/ui/input";
-import { loginSchema } from "@/lib/schema/auth";
 import { toast } from "react-hot-toast";
+import { login } from "@/lib/api/auth";
+import { isAxiosError, LoginResponse } from "@/lib/types/auth";
 
 export default function Login() {
 	const navigate = useNavigate();
@@ -12,20 +13,26 @@ export default function Login() {
 		e.preventDefault();
 		const formData = new FormData(e.target as HTMLFormElement);
 		const formValues = {
-			email: formData.get("email"),
+			mobile: formData.get("mobile"),
 			password: formData.get("password"),
 		};
 
-		// Validate form data
-		const parsed = loginSchema.safeParse(formValues);
-		if (!parsed.success) {
-			toast.error(parsed.error.errors[0].message);
-		} else {
-			// Placeholder for successful login (no API call)
-			toast.success("Login successful");
-			// Simulate token storage and navigation
-			sessionStorage.setItem("token", "fake-token");
-			navigate("/Registeredphysios");
+		try {
+			const res: LoginResponse | undefined = await login(String(formValues.mobile), String(formValues.password));
+			if (res && res.status >= 200 && res.status < 300) {
+				toast.success("Login successful");
+				localStorage.setItem("token", res.data.token);
+				navigate("/");
+			} else {
+				toast.error("Invalid mobile or password");
+			}
+		} catch (error) {
+			if (isAxiosError(error)) {
+				const errorMessage = error.response?.data?.message || "Something went wrong";
+				toast.error(errorMessage);
+			} else {
+				toast.error("Something went wrong");
+			}
 		}
 	};
 
@@ -50,18 +57,18 @@ export default function Login() {
 					>
 						<div>
 							<label
-								htmlFor="email"
+								htmlFor="mobile"
 								className="block text-sm/6 font-medium text-gray-900"
 							>
-								Email address
+								Mobile Number
 							</label>
 							<div className="mt-2">
 								<Input
-									id="email"
-									name="email"
-									type="string"
+									id="mobile"
+									name="mobile"
+									type="mobile"
+									maxLength={10}
 									required
-									autoComplete="email"
 									className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm/6"
 								/>
 							</div>

@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
-import { ChevronDown, MoreVertical, Lock, Search } from "lucide-react";
+import { ChevronDown, MoreVertical, Lock, Search, CalendarIcon } from "lucide-react";
 import image from "@/assets/Export (1).png";
 import {
 	DropdownMenu,
@@ -14,6 +14,10 @@ import { Popover, PopoverTrigger, PopoverContent } from "@radix-ui/react-popover
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
+import { DateRange } from "react-day-picker";
+import { addDays, format } from "date-fns";
+import { Calendar } from "@/components/ui/calendar";
 const physios = [
 	{
 		name: "Olivia Rhye",
@@ -206,6 +210,11 @@ const Physios: React.FC = () => {
 	};
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
+	const [date, setDate] = useState<DateRange | undefined>({
+		from: new Date(2022, 0, 20),
+		to: addDays(new Date(2022, 0, 20), 20),
+	});
+
 	return (
 		<div className="p-6 bg-gray-50 min-h-screen">
 			<div className="flex justify-end items-center mb-6">
@@ -214,35 +223,57 @@ const Physios: React.FC = () => {
 					<p className="text-lg text-black bg-[#E6F4EC]">(15,000 Physio's)</p>
 				</div>
 				<div className="flex items-center gap-4">
-					<DropdownMenu>
-						<DropdownMenuTrigger asChild>
-							<Button variant="outline">
-								All Time
-								<ChevronDown className="ml-2" />
+					<Popover>
+						<PopoverTrigger asChild>
+							<Button
+								id="date"
+								variant={"outline"}
+								className={cn("w-[220px] justify-start text-left font-normal", !date && "text-muted-foreground")}
+							>
+								<CalendarIcon />
+								{date?.from ? (
+									date.to ? (
+										<>
+											{format(date.from, "LLL dd, y")} - {format(date.to, "LLL dd, y")}
+										</>
+									) : (
+										format(date.from, "LLL dd, y")
+									)
+								) : (
+									<span>Pick a date</span>
+								)}
 							</Button>
-						</DropdownMenuTrigger>
-						<DropdownMenuContent>
-							<DropdownMenuItem>Week</DropdownMenuItem>
-							<DropdownMenuItem>Month</DropdownMenuItem>
-							<DropdownMenuItem>Year</DropdownMenuItem>
-						</DropdownMenuContent>
-					</DropdownMenu>
+						</PopoverTrigger>
+						<PopoverContent
+							className="w-auto p-0"
+							align="end"
+						>
+							<Button
+								variant="outline"
+								className="w-full shadow-none border-none"
+								onClick={() => {
+									const today = new Date();
+									setDate({ from: today, to: today }); // Set both start and end date to today
+								}}
+							>
+								Today
+							</Button>
+							<Calendar
+								initialFocus
+								mode="range"
+								defaultMonth={date?.from}
+								selected={date}
+								onSelect={setDate}
+								numberOfMonths={2}
+								className="bg-white"
+							/>
+						</PopoverContent>
+					</Popover>
 					<Button
 						variant="outline"
 						onClick={handleClick}
 					>
 						Add Physio's +
-					</Button>
-					<Button
-						variant="outline"
-						className="bg-[#039342] text-white hover:bg-[#039342] hover:text-white"
-					>
-						<img
-							src={image}
-							alt="Export Icon"
-							className="w-5 h-5"
-						/>
-						Export
 					</Button>
 				</div>
 			</div>
@@ -272,37 +303,55 @@ const Physios: React.FC = () => {
 			{/* Tabs */}
 
 			<Tabs defaultValue="all">
-				<TabsList className="flex p-2 mt-5 bg-gray-50 justify-start ">
-					<TabsTrigger
-						className="border-b-2 rounded-none shadow-none border-gray-200  data-[state=active]:text-green-500 data-[state=active]:border-green-500 data-[state=active]:bg-gray-50"
-						value="all"
+				<div className="flex justify-between items-center mt-5">
+					<TabsList className="flex p-2 bg-gray-50 justify-start ">
+						<TabsTrigger
+							className="border-b-2 rounded-none shadow-none border-gray-200  data-[state=active]:text-green-500 data-[state=active]:border-green-500 data-[state=active]:bg-gray-50"
+							value="all"
+						>
+							All Physio's
+						</TabsTrigger>
+						<TabsTrigger
+							className="border-b-2 rounded-none shadow-none border-gray-200  data-[state=active]:text-green-500 data-[state=active]:border-green-500 data-[state=active]:bg-gray-50"
+							value="approved"
+						>
+							Approved Physio's
+						</TabsTrigger>
+						<TabsTrigger
+							className="border-b-2 rounded-none shadow-none border-gray-200  data-[state=active]:text-green-500 data-[state=active]:border-green-500 data-[state=active]:bg-gray-50"
+							value="unapproved"
+						>
+							Unapproved Physio's
+						</TabsTrigger>
+						<TabsTrigger
+							className="border-b-2 rounded-none shadow-none border-gray-200  data-[state=active]:text-green-500 data-[state=active]:border-green-500 data-[state=active]:bg-gray-50"
+							value="blocked"
+						>
+							Block Physio's
+						</TabsTrigger>
+						<TabsTrigger
+							className="border-b-2 rounded-none shadow-none border-gray-200  data-[state=active]:text-green-500 data-[state=active]:border-green-500 data-[state=active]:bg-gray-50"
+							value="pending"
+						>
+							Pending Physio's
+						</TabsTrigger>
+					</TabsList>
+					<Button
+						variant="outline"
+						className="bg-[#039342] text-white hover:bg-[#039342] hover:text-white"
 					>
-						All Physio's
-					</TabsTrigger>
-					<TabsTrigger
-						className="border-b-2 rounded-none shadow-none border-gray-200  data-[state=active]:text-green-500 data-[state=active]:border-green-500 data-[state=active]:bg-gray-50"
-						value="approved"
-					>
-						Approved Physio's
-					</TabsTrigger>
-					<TabsTrigger
-						className="border-b-2 rounded-none shadow-none border-gray-200  data-[state=active]:text-green-500 data-[state=active]:border-green-500 data-[state=active]:bg-gray-50"
-						value="unapproved"
-					>
-						Unapproved Physio's
-					</TabsTrigger>
-					<TabsTrigger
-						className="border-b-2 rounded-none shadow-none border-gray-200  data-[state=active]:text-green-500 data-[state=active]:border-green-500 data-[state=active]:bg-gray-50"
-						value="blocked"
-					>
-						Block Physio's
-					</TabsTrigger>
-				</TabsList>
-
+						<img
+							src={image}
+							alt="Export Icon"
+							className="w-5 h-5"
+						/>
+						Export
+					</Button>
+				</div>
 				<TabsContent value="all">
 					{/* Search & Filters */}
 					<div className="flex justify-between my-4">
-						<div className="relative w-1/3">
+						<div className="relative w-1/4">
 							<Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
 							<Input
 								placeholder="Search for Physio’s doctor name..."
@@ -324,19 +373,52 @@ const Physios: React.FC = () => {
 								</DropdownMenuContent>
 							</DropdownMenu>
 
-							<DropdownMenu>
-								<DropdownMenuTrigger asChild>
-									<Button variant="outline">
-										Date Filter
-										<ChevronDown className="ml-2" />
+							<Popover>
+								<PopoverTrigger asChild>
+									<Button
+										id="date"
+										variant={"outline"}
+										className={cn("w-[220px] justify-start text-left font-normal", !date && "text-muted-foreground")}
+									>
+										<CalendarIcon />
+										{date?.from ? (
+											date.to ? (
+												<>
+													{format(date.from, "LLL dd, y")} - {format(date.to, "LLL dd, y")}
+												</>
+											) : (
+												format(date.from, "LLL dd, y")
+											)
+										) : (
+											<span>Pick a date</span>
+										)}
 									</Button>
-								</DropdownMenuTrigger>
-								<DropdownMenuContent>
-									<DropdownMenuItem>Today</DropdownMenuItem>
-									<DropdownMenuItem>Yesterday</DropdownMenuItem>
-									<DropdownMenuItem>Custom</DropdownMenuItem>
-								</DropdownMenuContent>
-							</DropdownMenu>
+								</PopoverTrigger>
+								<PopoverContent
+									className="w-auto p-0"
+									align="start"
+								>
+									<Button
+										variant="outline"
+										className="w-full shadow-none border-none"
+										onClick={() => {
+											const today = new Date();
+											setDate({ from: today, to: today }); // Set both start and end date to today
+										}}
+									>
+										Today
+									</Button>
+									<Calendar
+										initialFocus
+										mode="range"
+										defaultMonth={date?.from}
+										selected={date}
+										onSelect={setDate}
+										numberOfMonths={2}
+										className="bg-white"
+									/>
+								</PopoverContent>
+							</Popover>
 							{/* Physio’s Plan Dropdown */}
 							<DropdownMenu>
 								<DropdownMenuTrigger asChild>
@@ -469,19 +551,52 @@ const Physios: React.FC = () => {
 						</div>
 
 						<div className="flex gap-2">
-							<DropdownMenu>
-								<DropdownMenuTrigger asChild>
-									<Button variant="outline">
-										Date Filter
-										<ChevronDown className="ml-2" />
+							<Popover>
+								<PopoverTrigger asChild>
+									<Button
+										id="date"
+										variant={"outline"}
+										className={cn("w-[220px] justify-start text-left font-normal", !date && "text-muted-foreground")}
+									>
+										<CalendarIcon />
+										{date?.from ? (
+											date.to ? (
+												<>
+													{format(date.from, "LLL dd, y")} - {format(date.to, "LLL dd, y")}
+												</>
+											) : (
+												format(date.from, "LLL dd, y")
+											)
+										) : (
+											<span>Pick a date</span>
+										)}
 									</Button>
-								</DropdownMenuTrigger>
-								<DropdownMenuContent>
-									<DropdownMenuItem>Today</DropdownMenuItem>
-									<DropdownMenuItem>Yesterday</DropdownMenuItem>
-									<DropdownMenuItem>Custom</DropdownMenuItem>
-								</DropdownMenuContent>
-							</DropdownMenu>
+								</PopoverTrigger>
+								<PopoverContent
+									className="w-auto p-0"
+									align="start"
+								>
+									<Button
+										variant="outline"
+										className="w-full shadow-none border-none"
+										onClick={() => {
+											const today = new Date();
+											setDate({ from: today, to: today }); // Set both start and end date to today
+										}}
+									>
+										Today
+									</Button>
+									<Calendar
+										initialFocus
+										mode="range"
+										defaultMonth={date?.from}
+										selected={date}
+										onSelect={setDate}
+										numberOfMonths={2}
+										className="bg-white"
+									/>
+								</PopoverContent>
+							</Popover>
 
 							<DropdownMenu>
 								<DropdownMenuTrigger asChild>
@@ -612,6 +727,52 @@ const Physios: React.FC = () => {
 							/>
 						</div>
 						<div className="flex gap-2">
+							<Popover>
+								<PopoverTrigger asChild>
+									<Button
+										id="date"
+										variant={"outline"}
+										className={cn("w-[220px] justify-start text-left font-normal", !date && "text-muted-foreground")}
+									>
+										<CalendarIcon />
+										{date?.from ? (
+											date.to ? (
+												<>
+													{format(date.from, "LLL dd, y")} - {format(date.to, "LLL dd, y")}
+												</>
+											) : (
+												format(date.from, "LLL dd, y")
+											)
+										) : (
+											<span>Pick a date</span>
+										)}
+									</Button>
+								</PopoverTrigger>
+								<PopoverContent
+									className="w-auto p-0"
+									align="start"
+								>
+									<Button
+										variant="outline"
+										className="w-full shadow-none border-none"
+										onClick={() => {
+											const today = new Date();
+											setDate({ from: today, to: today }); // Set both start and end date to today
+										}}
+									>
+										Today
+									</Button>
+									<Calendar
+										initialFocus
+										mode="range"
+										defaultMonth={date?.from}
+										selected={date}
+										onSelect={setDate}
+										numberOfMonths={2}
+										className="bg-white"
+									/>
+								</PopoverContent>
+							</Popover>
 							<DropdownMenu>
 								<DropdownMenuTrigger asChild>
 									<Button variant="outline">
@@ -742,6 +903,52 @@ const Physios: React.FC = () => {
 							/>
 						</div>
 						<div className="flex gap-2">
+							<Popover>
+								<PopoverTrigger asChild>
+									<Button
+										id="date"
+										variant={"outline"}
+										className={cn("w-[220px] justify-start text-left font-normal", !date && "text-muted-foreground")}
+									>
+										<CalendarIcon />
+										{date?.from ? (
+											date.to ? (
+												<>
+													{format(date.from, "LLL dd, y")} - {format(date.to, "LLL dd, y")}
+												</>
+											) : (
+												format(date.from, "LLL dd, y")
+											)
+										) : (
+											<span>Pick a date</span>
+										)}
+									</Button>
+								</PopoverTrigger>
+								<PopoverContent
+									className="w-auto p-0"
+									align="start"
+								>
+									<Button
+										variant="outline"
+										className="w-full shadow-none border-none"
+										onClick={() => {
+											const today = new Date();
+											setDate({ from: today, to: today }); // Set both start and end date to today
+										}}
+									>
+										Today
+									</Button>
+									<Calendar
+										initialFocus
+										mode="range"
+										defaultMonth={date?.from}
+										selected={date}
+										onSelect={setDate}
+										numberOfMonths={2}
+										className="bg-white"
+									/>
+								</PopoverContent>
+							</Popover>
 							<DropdownMenu>
 								<DropdownMenuTrigger asChild>
 									<Button variant="outline">
@@ -888,6 +1095,7 @@ const Physios: React.FC = () => {
 					</Card>
 				</TabsContent>
 			</Tabs>
+
 			{/* Pagination */}
 			<div className="flex justify-between items-center mt-6">
 				<Button className="bg-white px-4 py-2 text-black hover:bg-white hover:text-black rounded">Previous</Button>

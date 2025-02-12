@@ -4,11 +4,12 @@ import { Toaster } from "react-hot-toast";
 import Login from "@/pages/auth/Login";
 import ResetPassword from "@/pages/auth/ResetPassword";
 import ForgetPassword from "@/pages/auth/ForgetPassword";
-import EditDetail from "./pages/EditDetail";
+import EditDetail from "./pages/Physio/EditDetail";
 import Patient from "@/pages/Patient";
 import ViewDetail from "./pages/Physio/ViewDetail";
 import Physios from "./pages/Physio/Physios";
 import Addphysio from "./pages/Physio/AddPhysio";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Define the router with the routes
 const router = createBrowserRouter([
@@ -69,9 +70,13 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+	const queryClient = new QueryClient();
+
 	return (
 		<div>
-			<RouterProvider router={router} />
+			<QueryClientProvider client={queryClient}>
+				<RouterProvider router={router} />
+			</QueryClientProvider>
 			<Toaster
 				position="top-right"
 				reverseOrder={false}
