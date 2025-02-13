@@ -12,6 +12,8 @@ import Physios from "./pages/Physios";
 import Addphysio from "./pages/AddPhysio";
 import Overview from "./pages/Overview";
 import EditPatient from "./pages/EditPatient";
+import Editrequest from "./pages/Editrequest";
+import Viewedit from "./pages/Viewedit";
 const RedirectToPreviousPage = () => {
   const navigate = useNavigate();
 
@@ -55,6 +57,12 @@ const router = createBrowserRouter([
         path: "/physios", 
         element: <Physios />,
       },
+      {
+         path:"/physio-edit",
+         element:<Editrequest/>,
+      },{
+      path:"viewedit/4",
+    element:<Viewedit/>,},
       {
 				path: "/addphysio",
 				element: <Addphysio />,
