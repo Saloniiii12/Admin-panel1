@@ -4,10 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { useEffect, useState } from "react";
-import { sendOtp } from "@/lib/api/auth";
+import { sendOtp, verifyOtp } from "@/lib/api/auth";
 import toast from "react-hot-toast";
 import { isAxiosError } from "@/lib/types/auth";
-import { forgetPasswordSchema } from "@/lib/schema/auth";
+import { forgetPasswordSchema, verifyOtpSchema } from "@/lib/schema/auth";
 
 const ForgetPassword = () => {
 	const [open, setOpen] = useState<boolean>(false);
@@ -144,15 +144,44 @@ export function OtpDialog({
 		}
 	}, [open]);
 
-	const handleResendOtp = () => {
-		alert("Resend OTP triggered"); // Simulate OTP resend
-		setDisabled(true);
-		setTimeLeft(60);
+	const handleResendOtp = async () => {
+		try {
+			const res = await sendOtp(Number(mobile));
+			if (res && res.status >= 200 && res.status < 300) {
+				setDisabled(true);
+				setTimeLeft(60);
+				toast.success("OTP sent successfully");
+			} else {
+				toast.error("Something went wrong");
+			}
+		} catch (error) {
+			if (isAxiosError(error)) {
+				const errorMessage = error.response?.data?.message || "Something went wrong";
+				toast.error(errorMessage);
+			} else {
+				toast.error("Something went wrong");
+			}
+		}
 	};
 
-	const handleVerifyOtp = () => {
-		alert(`Verifying OTP: ${otp}`); // Simulate OTP verification
-		navigate("/auth/reset-password");
+	const handleVerifyOtp = async () => {
+		const data = { mobile: String(mobile), otp: String(otp) };
+		const parsed = verifyOtpSchema.safeParse(data);
+		if (!parsed.success) {
+			console.log(parsed.error);
+		} else {
+			try {
+				const res = await verifyOtp(data);
+				navigate("/auth/reset-password", { state: { token: res?.data.token } });
+			} catch (error) {
+				if (isAxiosError(error)) {
+					const errorMessage = error.response?.data?.message || "Something went wrong";
+					toast.error(errorMessage);
+				} else {
+					toast.error("Something went wrong");
+				}
+			}
+		}
 	};
 
 	return (
