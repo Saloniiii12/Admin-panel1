@@ -4,24 +4,41 @@ import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { useEffect, useState } from "react";
+import { sendOtp } from "@/lib/api/auth";
+import toast from "react-hot-toast";
+import { isAxiosError } from "@/lib/types/auth";
+import { forgetPasswordSchema } from "@/lib/schema/auth";
 
 const ForgetPassword = () => {
 	const [open, setOpen] = useState<boolean>(false);
 	const [mobile, setMobile] = useState<number>(0);
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		const formData = new FormData(e.target as HTMLFormElement);
 		const formValues = {
 			mobile: formData.get("mobile"),
 		};
-
-		// Simulated form validation
-		if (!formValues.mobile) {
-			alert("Mobile number is required");
+		const parsed = forgetPasswordSchema.safeParse(formValues);
+		if (!parsed.success) {
+			toast.error(parsed.error.errors[0].message);
 		} else {
 			setMobile(Number(formValues.mobile));
-			setOpen(true); // Simulate opening OTP dialog
+			try {
+				const res = await sendOtp(Number(formValues.mobile));
+				if (res && res.status >= 200 && res.status < 300) {
+					setOpen(true);
+				} else {
+					toast.error("Something went wrong");
+				}
+			} catch (error) {
+				if (isAxiosError(error)) {
+					const errorMessage = error.response?.data?.message || "Something went wrong";
+					toast.error(errorMessage);
+				} else {
+					toast.error("Something went wrong");
+				}
+			}
 		}
 	};
 
@@ -29,16 +46,24 @@ const ForgetPassword = () => {
 		<div className="h-screen flex items-center justify-center">
 			<div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
-					<img alt="Physioplus" src={logo} className="mx-auto h-10 w-auto" />
-					<h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-						Recover your password
-					</h2>
+					<img
+						alt="Physioplus"
+						src={logo}
+						className="mx-auto h-10 w-auto"
+					/>
+					<h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Recover your password</h2>
 				</div>
 
 				<div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-					<form onSubmit={handleSubmit} className="space-y-6">
+					<form
+						onSubmit={handleSubmit}
+						className="space-y-6"
+					>
 						<div>
-							<label htmlFor="mobile" className="block text-sm/6 font-medium text-gray-900">
+							<label
+								htmlFor="mobile"
+								className="block text-sm/6 font-medium text-gray-900"
+							>
 								Mobile Number
 							</label>
 							<div className="mt-2">
@@ -70,7 +95,11 @@ const ForgetPassword = () => {
 							</button>
 						</div>
 					</form>
-					<OtpDialog mobile={mobile} open={open} setOpen={setOpen} />
+					<OtpDialog
+						mobile={mobile}
+						open={open}
+						setOpen={setOpen}
+					/>
 				</div>
 			</div>
 		</div>
@@ -127,7 +156,10 @@ export function OtpDialog({
 	};
 
 	return (
-		<Dialog open={open} onOpenChange={setOpen}>
+		<Dialog
+			open={open}
+			onOpenChange={setOpen}
+		>
 			<DialogContent className="sm:max-w-[425px] min-h-96 p-10 flex flex-col justify-between gap-2 data-[state=open]:animate-fade-in data-[state=closed]:animate-fade-out">
 				<DialogTitle className="text-center text-3xl font-semibold tracking-tight text-gray-900">
 					Enter the OTP
@@ -136,18 +168,33 @@ export function OtpDialog({
 					<DialogDescription className="text-base">
 						Sent to +91 <span className="font-semibold text-green-600">{mobile}</span>
 					</DialogDescription>
-					<InputOTP maxLength={4} onChange={(e) => setOtp(e)}>
+					<InputOTP
+						maxLength={4}
+						onChange={(e) => setOtp(e)}
+					>
 						<InputOTPGroup>
-							<InputOTPSlot index={0} className="w-12 h-12 border-black" />
+							<InputOTPSlot
+								index={0}
+								className="w-12 h-12 border-black"
+							/>
 						</InputOTPGroup>
 						<InputOTPGroup>
-							<InputOTPSlot index={1} className="w-12 h-12 border-black" />
+							<InputOTPSlot
+								index={1}
+								className="w-12 h-12 border-black"
+							/>
 						</InputOTPGroup>
 						<InputOTPGroup>
-							<InputOTPSlot index={2} className="w-12 h-12 border-black" />
+							<InputOTPSlot
+								index={2}
+								className="w-12 h-12 border-black"
+							/>
 						</InputOTPGroup>
 						<InputOTPGroup>
-							<InputOTPSlot index={3} className="w-12 h-12 border-black" />
+							<InputOTPSlot
+								index={3}
+								className="w-12 h-12 border-black"
+							/>
 						</InputOTPGroup>
 					</InputOTP>
 
@@ -158,13 +205,19 @@ export function OtpDialog({
 								Resend in {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, "0")}
 							</span>
 						) : (
-							<button className="underline text-green-600" onClick={handleResendOtp}>
+							<button
+								className="underline text-green-600"
+								onClick={handleResendOtp}
+							>
 								Resend
 							</button>
 						)}
 					</div>
 				</div>
-				<button className="bg-green-600 text-white py-1.5 px-4 rounded-md" onClick={handleVerifyOtp}>
+				<button
+					className="bg-green-600 text-white py-1.5 px-4 rounded-md"
+					onClick={handleVerifyOtp}
+				>
 					Verify OTP
 				</button>
 			</DialogContent>

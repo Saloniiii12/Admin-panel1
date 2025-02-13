@@ -15,7 +15,7 @@ export const login = async (mobile: string, password: string) => {
 
 export const sendOtp = async (mobile: number) => {
 	try {
-		const res = await instance.post("send-otp", {
+		const res = await instance.post("auth/sendOtp", {
 			phone: mobile,
 		});
 		return res;
@@ -26,7 +26,7 @@ export const sendOtp = async (mobile: number) => {
 
 export const verifyOtp = async (data: { mobile: string; otp: string }) => {
 	try {
-		const res = await instance.post("verify-otp", {
+		const res = await instance.post("auth/verifyOtp", {
 			phone: data.mobile,
 			otp: data.otp,
 		});
@@ -39,7 +39,7 @@ export const verifyOtp = async (data: { mobile: string; otp: string }) => {
 export const resetPassword = async (password: string, token: string) => {
 	try {
 		const res = await instance.post(
-			"reset-password",
+			"auth/reset-Password",
 			{
 				password,
 			},

@@ -14,7 +14,7 @@ const MainLayout = () => {
 		} else {
 			navigate("/physios");
 		}
-	}, []);
+	}, [navigate]);
 
 	return (
 		<>

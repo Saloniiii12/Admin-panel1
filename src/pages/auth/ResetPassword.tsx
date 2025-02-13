@@ -3,6 +3,9 @@ import logo from "@/assets/image 2.png";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { resetPasswordSchema } from "@/lib/schema/auth";
+import { resetPassword } from "@/lib/api/auth";
+import { AxiosError } from "axios";
 
 const ResetPassword = () => {
 	const { state } = useLocation();
@@ -26,13 +29,27 @@ const ResetPassword = () => {
 
 	const handleResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (password !== confirmPassword) {
-			toast.error("Passwords do not match");
-		} else if (password.length === 0) {
-			toast.error("Password cannot be empty");
+		const parsed = resetPasswordSchema.safeParse({ password, confirmPassword });
+		if (!parsed.success) {
+			toast.error(parsed.error.message);
 		} else {
-			toast.success("Password reset successfully!");
-			navigate("/auth/login");
+			try {
+				const res = await resetPassword(password, state.token);
+				if (res && res.data.message) {
+					toast.success(res.data.message);
+					navigate("/auth/login");
+				}
+			} catch (error: unknown) {
+				if (error instanceof AxiosError) {
+					if (error.response && error.response.data && error.response.data.message) {
+						toast.error(error.response.data.message);
+					} else {
+						toast.error("Something went wrong");
+					}
+				} else {
+					toast.error("Something went wrong");
+				}
+			}
 		}
 	};
 
