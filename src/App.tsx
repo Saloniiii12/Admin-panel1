@@ -14,6 +14,8 @@ import Overview from "./pages/Overview";
 import EditPatient from "./pages/EditPatient";
 import Editrequest from "./pages/Editrequest";
 import Viewedit from "./pages/Viewedit";
+import Helpsupport from "./pages/Helpsupport";
+
 const RedirectToPreviousPage = () => {
   const navigate = useNavigate();
 
@@ -38,7 +40,7 @@ const router = createBrowserRouter([
 				path: "login",
 				element: <Login />,
 			},
-			
+		
 			{
 				path: "forget-password",
 				element: <ForgetPassword />,
@@ -53,6 +55,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <MainLayout />, 
     children: [
+      // {
+      //   path:"/notification",
+      //   element:<Notification/>,
+      // },
       {
         path: "/physios", 
         element: <Physios />,
@@ -67,6 +73,10 @@ const router = createBrowserRouter([
 				path: "/addphysio",
 				element: <Addphysio />,
 			},
+  {
+path:"/help",
+element:<Helpsupport/>,
+  },
       {
         path: "edit/3", // Route for fixed ID 3
         element: <EditDetail />,
