@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogTrigger, DialogContent } from "@/components/ui/dialog";
 import {
@@ -20,6 +20,7 @@ import {
 import { Input } from "@/components/ui/input";
 import Invoice from "@/assets/Invoice.png";
 import image from "@/assets/Export (1).png";
+
 const Transcation = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
@@ -31,6 +32,7 @@ const Transcation = () => {
   };
   const [openDialog, setOpenDialog] = useState(false);
   const [activeTab, setActiveTab] = useState("basic");
+ 
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">

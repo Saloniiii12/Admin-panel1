@@ -1,6 +1,8 @@
 import { Card, CardContent} from "@/components/ui/card";
 import { Avatar } from "@/components/ui/avatar";
 const Basicdetail = () => {
+ 
+  
   return (
     <Card className="mb-6">
          <CardContent>

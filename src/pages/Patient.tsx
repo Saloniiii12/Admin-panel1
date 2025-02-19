@@ -33,64 +33,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useState } from "react";
-
-const patients = [
-  {
-    name: "Olivia Rhye",
-    phone: "9876543210",
-    gender: "Male",
-    state: "Rajasthan",
-    city: "Jaipur",
-    pincode: "302020",
-    date: "2005",
-  },
-  {
-    name: "Olivia Rhye",
-    phone: "9876543210",
-    gender: "Male",
-    state: "Rajasthan",
-    city: "Jaipur",
-    pincode: "302020",
-    date: "2005",
-  },
-  {
-    name: "Olivia Rhye",
-    phone: "9876543210",
-    gender: "Male",
-    state: "Rajasthan",
-    city: "Jaipur",
-    pincode: "302020",
-    date: "2005",
-  },
-  {
-    name: "Olivia Rhye",
-    phone: "9876543210",
-    gender: "Male",
-    state: "Rajasthan",
-    city: "Jaipur",
-    pincode: "302020",
-    date: "2005",
-  },
-  {
-    name: "Olivia Rhye",
-    phone: "9876543210",
-    gender: "Male",
-    state: "Rajasthan",
-    city: "Jaipur",
-    pincode: "302020",
-    date: "2005",
-  },
-  {
-    name: "Olivia Rhye",
-    phone: "9876543210",
-    gender: "Male",
-    state: "Rajasthan",
-    city: "Jaipur",
-    pincode: "302020",
-    date: "2005",
-  },
-];
+import { useEffect, useState } from "react";
+import { getPost } from "@/lib/Api/Patient";
+import { TableBody, TableRow, TableCell } from "@/components/ui/table";
+import { blockPatient } from "@/lib/Api/Patient";
 const consultation = [
   {
     name: "Olivia Rhye",
@@ -203,7 +149,6 @@ const treatment = [
     status: "Pending",
   },
 ];
-
 const Patient: React.FC = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -222,6 +167,34 @@ const Patient: React.FC = () => {
     navigate(`/overview/${patientId}`);
   };
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [patients, setPatients] = useState<Patient[]>([]);
+  useEffect(() => {
+    const getPostData = async () => {
+      try {
+        const res = await getPost();
+        console.log(res.data.data.patients);
+        setPatients(res.data.data.patients || []); // Set data to state
+     // Check the entire response structure
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    getPostData();
+  }, []);
+
+
+const handleBlock = async (patientId: string) => {
+  try {
+    await blockPatient(patientId);
+    alert(`Patient ${patientId} has been blocked.`);
+    
+    // Optional: Update UI after blocking
+    setPatients((prev) => prev.filter((p) => p.id !== patientId));
+  } catch (error) {
+    console.error("Block API Error:", error);
+    alert("Failed to block patient. Try again.");
+  }
+};
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
@@ -384,22 +357,38 @@ const Patient: React.FC = () => {
                     <th>State</th>
                     <th>City</th>
                     <th>Pincode</th>
+
                   </tr>
                 </thead>
-                <tbody>
-                  {patients.map((patient, index) => (
-                    <tr key={index} className="border-b">
-                      <td className="p-4">
-                        <p className="font-medium">{patient.name}</p>
-                      </td>
-                      <td>{patient.phone}</td>
-                      <td>{patient.date}</td>
-                      <td>{patient.gender}</td>
-                      <td>{patient.state}</td>
-                      <td>{patient.city}</td>
-                      <td>{patient.pincode}</td>
-
-                      <td>
+                <TableBody>
+  {patients.length === 0 ? (
+    <TableRow>
+      <TableCell colSpan={8} className="text-center">
+        No data available
+      </TableCell>
+    </TableRow>
+  ) : (
+    patients.map((patient, index) => (
+      <TableRow key={index}>
+        <TableCell>{patient.fullName|| "N/A"}</TableCell>
+        <TableCell>{patient.phone}</TableCell>
+        <TableCell>{patient.dob}</TableCell>
+        <TableCell>{patient.gender}</TableCell>
+        <TableCell>{patient.state}</TableCell>
+        <TableCell>{patient.city}</TableCell>
+        <TableCell>{patient.zipCode}</TableCell>
+        <TableCell>
+          <span
+            className={`px-2 py-1 rounded-full text-sm font-medium ${
+              patient.staus === "Pending"
+                ? "bg-red-100 text-red-600"
+                : "bg-green-100 text-green-800"
+            }`}
+          >
+            {patient.status}
+          </span>
+        </TableCell>
+           <td>
                         <DropdownMenu>
                           <DropdownMenuTrigger>
                             <MoreVertical className="cursor-pointer" />
@@ -411,16 +400,18 @@ const Patient: React.FC = () => {
                             </DropdownMenuItem>
 
                             <hr />
-                            <DropdownMenuItem>
+                            <DropdownMenuItem onClick={() => handleBlock(patient._id)}> 
                               <Lock />
                               Block
                             </DropdownMenuItem>
                           </DropdownMenuContent>
                         </DropdownMenu>
                       </td>
-                    </tr>
-                  ))}
-                </tbody>
+      </TableRow>
+    ))
+  )}
+</TableBody>
+
               </table>
             </CardContent>
           </Card>
@@ -1441,7 +1432,6 @@ const Patient: React.FC = () => {
             </div>
           </div>
           {/* Table */}
-
           <Card>
             <CardContent>
               <table className="w-full border-collapse">
@@ -1468,7 +1458,6 @@ const Patient: React.FC = () => {
                       <td>{patient.state}</td>
                       <td>{patient.city}</td>
                       <td>{patient.pincode}</td>
-
                       <td>
                         <DropdownMenu>
                           <DropdownMenuTrigger>
@@ -1479,7 +1468,6 @@ const Patient: React.FC = () => {
                               <img src={Vector} className="w-4 h-4" />
                               View Patient Profile
                             </DropdownMenuItem>
-
                             <hr />
                             <DropdownMenuItem>
                               <Unlock />
