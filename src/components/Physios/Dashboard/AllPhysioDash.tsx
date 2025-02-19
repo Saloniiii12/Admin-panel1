@@ -9,7 +9,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+// import { allPhysioOnDashBoard } from "@/lib/api/physio";
 import { cn } from "@/lib/utils";
+// import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { CalendarIcon, ChevronDown, MoreVertical, Search } from "lucide-react";
 import { useState } from "react";
@@ -80,6 +82,17 @@ const physios = [
 
 const AllPhysioDash = ({ handleClickViewProp }: { handleClickViewProp: (id: string) => void }) => {
 	const [date, setDate] = useState<DateRange | undefined>(undefined);
+	// const [page, setPage] = useState();
+	// const [serviceType, setServiceType] = useState();
+	// const [planName, setPlanName] = useState();
+	// const [searchText, setSearchText] = useState<string | null>(null);
+	// const [accountStatus, setAccount] = useState();
+
+	// All Physio data from API
+	// const { data, error, isLoading } = useQuery({
+	// 	queryKey: [],
+	// 	queryFn: () => allPhysioOnDashBoard(page, serviceType, planName, accountStatus, searchText),
+	// });
 
 	return (
 		<>
@@ -90,6 +103,8 @@ const AllPhysioDash = ({ handleClickViewProp }: { handleClickViewProp: (id: stri
 					<Input
 						placeholder="Search for Physio’s doctor name..."
 						className="pl-10"
+						// value={searchText || ""}
+						// onChange={(e) => setSearchText(e)}
 					/>
 				</div>
 				<div className="flex gap-2">
@@ -166,8 +181,7 @@ const AllPhysioDash = ({ handleClickViewProp }: { handleClickViewProp: (id: stri
 							<DropdownMenuItem>Premium</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>
-					{/* 
-      Service Type Dropdown */}
+					{/* Service Type Dropdown */}
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
 							<Button variant="outline">
@@ -283,7 +297,9 @@ const AllPhysioDash = ({ handleClickViewProp }: { handleClickViewProp: (id: stri
 						<Button
 							key={index}
 							className={`px-3 py-1 mx-1 rounded ${
-								index === 0 ? "bg-[#F9F5FF] text-[#7F56D9]" : "bg-gray-200 hover:bg-[#F9F5FF] hover:text-[#7F56D9]"
+								index === 0
+									? "bg-green-500 hover:bg-green-500 text-white"
+									: "bg-green-400 hover:bg-green-500 hover:text-white"
 							}`}
 						>
 							{index + 1}

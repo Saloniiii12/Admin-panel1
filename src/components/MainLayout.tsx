@@ -11,8 +11,6 @@ const MainLayout = () => {
 		const token = localStorage.getItem("token");
 		if (!token || token === "") {
 			navigate("/auth/login");
-		} else {
-			navigate("/physios");
 		}
 	}, [navigate]);
 

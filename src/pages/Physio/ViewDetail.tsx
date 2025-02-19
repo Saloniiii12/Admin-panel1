@@ -10,15 +10,18 @@ import HelpandSupport from "../../components/Physios/HelpandSupport";
 import RatingandReviews from "../../components/Physios/RatingandReviews";
 import Wallet from "../../components/Physios/Wallet";
 import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link, useLocation } from "react-router-dom";
+
 const ViewDetail: React.FC = () => {
+	const { id } = useParams();
 	const [activeTab, setActiveTab] = useState("basic detail");
 
 	const navigate = useNavigate();
 
+	// hardcoded
 	const handleEditClick = () => {
-		const physioId = 3; // Replace this with dynamic ID logic
+		const physioId = 3;
 		navigate(`/physios/edit/${physioId}`);
 	};
 	// Breadcrumb Component
@@ -51,6 +54,7 @@ const ViewDetail: React.FC = () => {
 			</div>
 		);
 	};
+
 	return (
 		<div className="bg-gray-100 min-h-screen p-6">
 			{/* Title Section */}
@@ -145,10 +149,10 @@ const ViewDetail: React.FC = () => {
 						</TabsContent>
 					</TabsList>
 					<TabsContent value="basic detail">
-						<Basicdetail />
+						<Basicdetail physioId={id || ""} />
 					</TabsContent>
 					<TabsContent value="subscription plan">
-						<Subscriptionplan />
+						<Subscriptionplan physioId={id || ""} />
 					</TabsContent>
 					<TabsContent value="transaction">
 						<Transcation />
